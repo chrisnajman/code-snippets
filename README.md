@@ -94,4 +94,4 @@ All snippets tested on Windows 10 with:
 - Firefox
 - Microsoft Edge
 
-Each snippet been tested in both browser and device views.
+Each snippet tested in both browser and device views.
