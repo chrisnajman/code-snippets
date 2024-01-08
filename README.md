@@ -82,7 +82,7 @@ setMultipleAttributes(btnSubmit, {
     type: "submit",
     "data-submit-btn": "1",
     "aria-pressed": "false"
-    // Note that attributes that contain hyphens must be written as strings.
+    // Note that attributes containing hyphens must be written as strings.
 })
 
 console.log(btnSubmit)
