@@ -1,6 +1,9 @@
 # Code Snippets
 
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
+- [Set Multiple Attributes](#set-multiple-attributes)
+
+---
 
 ## CSS Variables with JavaScript: Toggle background colour
 
@@ -46,6 +49,42 @@ btnChangeBodyBg.addEventListener("click", () => {
         : root.style.setProperty(bodyBgVal, null)
 })
 ```
+
+---
+
+## Set Multiple Attributes
+
+```JavaScript
+function setMultipleAttributes(element, attributesToSet) {
+  for (let i in attributesToSet) {
+    element.setAttribute(i, attributesToSet[i])
+    // i is the attribute(s)
+    // [i] is the attribute value(s)
+  }
+}
+
+// Example
+const btnSubmit = document.createElement("button")
+setMultipleAttributes(btnSubmit, {
+    type: "submit",
+    "data-submit-btn": "1",
+    "aria-pressed": "false"
+})
+
+console.log(btnSubmit)
+```
+
+### Output
+
+```HTML
+<button type="submit" data-submit-btn="1" aria-pressed="false"></button>
+```
+
+### Source
+
+[Migel Hewage Nimesha, DelftStack](https://www.delftstack.com/howto/javascript/set-multiple-attributes-to-an-element-using-javascript/)
+
+---
 
 ## Testing
 
