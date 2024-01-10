@@ -3,6 +3,7 @@
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
 - [Set Multiple Attributes](#set-multiple-attributes)
 - [Global Event Listener](#global-event-listener)
+- [Perfectly-rounded buttons](#perfectly-rounded-buttons)
 
 ---
 
@@ -239,6 +240,41 @@ For a more detailed discussion see [StackOverflow, JavaScript global event liste
 
 ---
 
+## Perfectly-rounded buttons
+
+```HTML
+<button type="button">Button</button>
+```
+
+```CSS
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+button {
+    all: unset;
+    background: blue;
+    color: white;
+    font-family: system-ui;
+    font-weight: 600;
+    font-size: 2rem;
+    padding: 1.6rem 2.4rem;
+
+    /**
+      Perfectly rounded left and right edges:
+    **/
+    border-radius: 100vw;
+}
+```
+
+---
+
 ## Testing
 
 All snippets tested on Windows 10 with:
@@ -248,7 +284,3 @@ All snippets tested on Windows 10 with:
 - Microsoft Edge
 
 Each snippet tested in both browser and device views.
-
-```
-
-```
