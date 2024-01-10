@@ -4,6 +4,7 @@
 - [Set Multiple Attributes](#set-multiple-attributes)
 - [Global Event Listener](#global-event-listener)
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
+- [@media (hover: hover)](#media-hover-hover)
 
 ---
 
@@ -270,6 +271,27 @@ button {
       Perfectly rounded left and right edges:
     **/
     border-radius: 100vw;
+}
+```
+
+---
+
+## `@media (hover: hover)`
+
+Targets only those devices which support `:hover` and excludes those which don't, e.g. mobiles and tablets.
+
+Useful if you find that a `:hover` state 'sticks' on mobile/tablet.
+
+```CSS
+li a {
+    border-bottom: 5px solid blue;
+}
+
+/* Excludes mobiles and tablets from trying to :hover */
+@media (hover: hover) {
+    li a:hover {
+        border-bottom-color: red;
+    }
 }
 ```
 
