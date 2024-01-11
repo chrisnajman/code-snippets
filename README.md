@@ -1,10 +1,11 @@
-# Code Snippets
+cf# Code Snippets
 
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
 - [Set Multiple Attributes](#set-multiple-attributes)
 - [Global Event Listener](#global-event-listener)
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
 - [@media (hover: hover)](#media-hover-hover)
+- [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
 
 ---
 
@@ -293,6 +294,51 @@ li a {
         border-bottom-color: red;
     }
 }
+```
+
+---
+
+## If statement vs Conditional (ternary) operator
+
+**Ternary**: composed of three.
+
+```HTML
+<figure>
+    <img src="some-image.jpg" alt="">
+    <figcaption id="image-caption">Caption 1</figcaption>
+</figure>
+
+<button type="button" id="btn-caption">Add caption</button>
+```
+
+```JavaScript
+const imageCaption = document.getElementById("image-caption")
+const btnCaption = document.getElementById("btn-caption")
+
+btnCaption.addEventListener("click", e => {
+
+    // EITHER:
+    // If statement
+    if (imageCaption.textContent === "Caption 1") {
+        imageCaption.textContent = "Caption 2"
+    } else {
+        imageCaption.textContent = "Caption 1"
+    }
+
+    // OR:
+    // Conditional (Ternary) operator V.1
+    imageCaption.textContent === "Caption 1"
+        ? (imageCaption.textContent = "Caption 2")
+        : (imageCaption.textContent = "Caption 1")
+
+    // OR:
+    // Conditional (Ternary) operator V.2
+    imageCaption.textContent =
+        imageCaption.textContent === "Caption 1" ? "Caption 2" : "Caption 1"
+
+    // Will toggle the <figcaption> text.
+
+})
 ```
 
 ---
