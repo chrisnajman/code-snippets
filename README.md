@@ -6,6 +6,7 @@ cf# Code Snippets
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
 - [@media (hover: hover)](#media-hover-hover)
 - [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
+- [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
 
 ---
 
@@ -339,6 +340,42 @@ btnCaption.addEventListener("click", e => {
     // Will toggle the <figcaption> text.
 
 })
+```
+
+---
+
+## Accessible details/summary 'accordion'
+
+```HTML
+<details id="details">
+    <summary aria-controls="#details" class="summary" id="summary" aria-expanded="false">
+        <span id="summary-status">Open</span> details
+    </summary>
+    <p>Details content...</p>
+</details>
+```
+
+```JavaScript
+const details = document.getElementById("details")
+const summary = document.getElementById("summary")
+const summaryStatus = document.getElementById("summary-status")
+
+details.addEventListener("toggle", () => {
+    // Note: the browser adds and removes the 'open' attribute
+    if (details.open) {
+        summary.setAttribute("aria-expanded", "true")
+        summaryStatus.textContent = "Close"
+    } else {
+        summary.setAttribute("aria-expanded", "false")
+        summaryStatus.textContent = "Open"
+    }
+})
+```
+
+```CSS
+.summary {
+    cursor: pointer;
+}
 ```
 
 ---
