@@ -1,4 +1,4 @@
-cf# Code Snippets
+# Code Snippets
 
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
 - [Set Multiple Attributes](#set-multiple-attributes)
