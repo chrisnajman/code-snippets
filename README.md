@@ -348,7 +348,7 @@ btnCaption.addEventListener("click", e => {
 
 ```HTML
 <details id="details">
-    <summary aria-controls="#details" class="summary" id="summary" aria-expanded="false">
+    <summary aria-controls="#details" id="summary" aria-expanded="false">
         <span id="summary-status">Open</span> details
     </summary>
     <p>Details content...</p>
