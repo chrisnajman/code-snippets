@@ -7,6 +7,7 @@
 - [@media (hover: hover)](#media-hover-hover)
 - [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
 - [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
+- [Clear local storage](#clear-local-storage)
 
 ---
 
@@ -376,6 +377,30 @@ details.addEventListener("toggle", () => {
 .summary {
     cursor: pointer;
 }
+```
+
+---
+
+## Clear Local Storage
+
+Clicking the button launches a `confirm` dialog. If you click 'yes', local storage will be cleared.
+
+Useful for _local_ development on the VSCode server. **Not** recommended as a production option because if the user is running the project from the file location, clicking the button will clear local storage for every project that is using this location.
+
+```HTML
+<button id="clear-local-storage" type="button">
+    Clear local storage
+</button>
+```
+
+```JavaScript
+const clearLocalStorage = document.getElementById("clear-local-storage")
+
+clearLocalStorage.addEventListener("click", () => {
+    if (window.confirm("Do you really want to clear all local storage?")) {
+        window.localStorage.clear()
+    }
+})
 ```
 
 ---
