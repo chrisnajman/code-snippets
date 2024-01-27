@@ -8,6 +8,8 @@
 - [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
 - [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
 - [Clear local storage](#clear-local-storage)
+- [Typographical Flow](#typographical-flow)
+- [Centred, Variable Max-width Container](#centred-variable-max-width-container)
 
 ---
 
@@ -405,12 +407,79 @@ clearLocalStorage.addEventListener("click", () => {
 
 ---
 
+## Typographical Flow
+
+The `flow` class will:
+
+- add `margin-top: 1em` to _all_ elements _after_ the first child of the container,
+- space the elements out proportionately, based on the font-size of the elements (which is why `em` rather than `rem` is used).
+
+```CSS
+* {
+    margin: 0;
+}
+
+.flow > * + * {
+    margin-top: 1em;
+    /* em NOT rem & margin-top NOT margin bottom */
+}
+```
+
+```HTML
+<article class="flow">
+    <h2>Main Heading</h2><!-- NO margin-top -->
+    <p>Some text.</p><!-- HAS margin-top -->
+    <p>Some text.</p><!-- HAS margin-top -->
+    <p>Some text.</p><!-- HAS margin-top -->
+    <!-- etc -->
+</article>
+
+```
+
+---
+
+## Centred, Variable Max-width Container
+
+Ensures space on the left and right of the container once the `max-width` threshold has been crossed.
+
+Note: No padding required on the container.
+
+```CSS
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+.container {
+    /* Locally-scoped CSS variables */
+    --_content-max-width: 120rem; /* i.e. 120 X 10px = 1200px */
+    --_content-space-outside: 2rem;
+
+    width: min(var(--_content-max-width), 100% - var(--_content-space-outside) * 2);
+    margin-inline: auto;
+}
+```
+
+```HTML
+<article class="container">
+    <h2>Main Heading</h2>
+    <p>Some text.</p>
+    <p>Some text.</p>
+    <p>Some text.</p>
+</article>
+```
+
+---
+
 ## Testing
 
 All snippets tested on Windows 10 with:
 
-- Chrome
-- Firefox
-- Microsoft Edge
+- Chrome 121.0.6167.85 (Official Build) (64-bit)
+- Firefox 122.0 (64-bit)
+- Microsoft Edge 120.0.2210.144 (Official build) (64-bit)
 
 Each snippet tested in both browser and device views.
