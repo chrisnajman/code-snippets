@@ -10,6 +10,7 @@
 - [Clear local storage](#clear-local-storage)
 - [Typographical Flow](#typographical-flow)
 - [Centred, Variable Max-width Container](#centred-variable-max-width-container)
+- [Delete Local Storage Keys](#delete-local-storage-keys)
 
 ---
 
@@ -474,6 +475,97 @@ html {
 
 ---
 
+## Delete Local Storage Keys
+
+```HTML
+<button class="delete-all-entries" data-delete-all-entries>
+    Delete all entries
+</button>
+```
+
+```JavaScript
+const deleteAllBtn = document.querySelector("[data-delete-all-entries]")
+```
+
+### Delete All Keys
+
+It's easy to delete _all_ local storage, but that's not always what you want.
+
+For instance, you could be running multiple apps from the local file system (`file:///C:/Users/...` on Windows) each app using differently named local storage keys.
+If you deleted all local storage, all the apps would return to their default state.
+
+```JavaScript
+function deleteEntries() {
+    deleteAllBtn.addEventListener("click", () => {
+
+        if (window.confirm("Do you really want to delete all entries?")) {
+
+            window.localStorage.clear()
+            window.location.reload()
+
+        }
+
+    })
+}
+deleteEntries()
+```
+
+### Delete Single Specific Key
+
+In this example, only the `LOCAL_STORAGE_KEY-table-entries` key will be deleted, leaving any other keys intact.
+
+```JavaScript
+function deleteEntries() {
+    deleteAllBtn.addEventListener("click", () => {
+
+        if (window.confirm("Do you really want to delete all entries?")) {
+
+            const keyToRemove = "LOCAL_STORAGE_KEY-table-entries"
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i)
+                if (key.startsWith(keyToRemove)) {
+                    localStorage.removeItem(key)
+                }
+            }
+
+            window.location.reload()
+        }
+
+    })
+}
+deleteEntries()
+```
+
+### Delete Multiple Specific Keys
+
+In this example, both the `LOCAL_STORAGE_KEY-table-entries` and `LOCAL_STORAGE_KEY-button-state ` keys will be deleted, leaving all other keys intact.
+
+```JavaScript
+function deleteEntries() {
+    deleteAllBtn.addEventListener("click", () => {
+        if (window.confirm("Do you really want to delete all entries?")) {
+
+            const keysToRemove = ["LOCAL_STORAGE_KEY-table-entries","LOCAL_STORAGE_KEY-button-state"]
+
+            keysToRemove.forEach((keyToRemove) => {
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i)
+                    if (key.startsWith(keyToRemove)) {
+                        localStorage.removeItem(key)
+                    }
+                }
+            })
+
+            window.location.reload()
+        }
+    })
+}
+deleteEntries()
+```
+
+---
+
 ## Testing
 
 All snippets tested on Windows 10 with:
@@ -483,3 +575,5 @@ All snippets tested on Windows 10 with:
 - Microsoft Edge 120.0.2210.144 (Official build) (64-bit)
 
 Each snippet tested in both browser and device views.
+
+---
