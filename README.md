@@ -12,6 +12,7 @@
 - [Centred, Variable Max-width Container](#centred-variable-max-width-container)
 - [Delete Local Storage Keys](#delete-local-storage-keys)
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
+- [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 
 ---
 
@@ -588,17 +589,28 @@ if (ITEM) {
 
 ---
 
-## Testing
+## GitHub Markdown: Notes and Warnings
 
-All snippets tested on Windows 10 with:
+### Markdown
 
-- Chrome
-- Firefox
-- Microsoft Edge
+```
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
 
-Each snippet tested in both browser and device views.
+> [!TIP]
+> Optional information to help a user be more successful.
 
----
+> [!IMPORTANT]
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+```
+
+### Output
 
 > [!NOTE]  
 > Highlights information that users should take into account, even when skimming.
@@ -614,3 +626,15 @@ Each snippet tested in both browser and device views.
 
 > [!CAUTION]
 > Negative potential consequences of an action.
+
+---
+
+## Testing
+
+All snippets tested on Windows 10 with:
+
+- Chrome
+- Firefox
+- Microsoft Edge
+
+Each snippet tested in both browser and device views.
