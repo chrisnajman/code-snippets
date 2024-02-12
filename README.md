@@ -11,6 +11,7 @@
 - [Typographical Flow](#typographical-flow)
 - [Centred, Variable Max-width Container](#centred-variable-max-width-container)
 - [Delete Local Storage Keys](#delete-local-storage-keys)
+- [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 
 ---
 
@@ -566,14 +567,50 @@ deleteEntries()
 
 ---
 
+## Quick Fix for 'Uncaught TypeError: ITEM is undefined'
+
+If the console prints an error message along the lines of ...
+
+```
+Uncaught TypeError: ITEM is undefined
+```
+
+... a _potential_ quick fix is to wrap the offending ITEM in an `if` statement:
+
+```JavaScript
+
+if (ITEM) {
+
+    // ITEM code ...
+
+}
+```
+
+---
+
 ## Testing
 
 All snippets tested on Windows 10 with:
 
-- Chrome 121.0.6167.85 (Official Build) (64-bit)
-- Firefox 122.0 (64-bit)
-- Microsoft Edge 120.0.2210.144 (Official build) (64-bit)
+- Chrome
+- Firefox
+- Microsoft Edge
 
 Each snippet tested in both browser and device views.
 
 ---
+
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
