@@ -13,6 +13,7 @@
 - [Delete Local Storage Keys](#delete-local-storage-keys)
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
+- [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
 
 ---
 
@@ -626,6 +627,50 @@ if (ITEM) {
 
 > [!CAUTION]
 > Negative potential consequences of an action.
+
+---
+
+## Save Button Toggle Text to Local Storage
+
+```HTML
+<button id="btn">Button text A</button>
+```
+
+```JavaScript
+const LOCAL_STORAGE_KEY = "button-toggle-text"
+const btn = document.getElementById("btn")
+
+// Save button toggle text to local storage on button click
+btn.addEventListener("click", (e) => {
+  if (e.target.textContent === "Button text A") {
+    localStorageButtonText(e, "Button text B")
+  } else if (e.target.textContent === "Button text B") {
+    localStorageButtonText(e, "Button text A")
+  }
+})
+
+function localStorageButtonText(e, btnText) {
+  localStorage.setItem(LOCAL_STORAGE_KEY, btnText)
+  const storedBtnText = localStorage.getItem(LOCAL_STORAGE_KEY)
+  e.target.textContent = storedBtnText
+}
+
+/*
+  Set initial button text on page load,
+  if text has been saved, i.e. button has already been clicked.
+*/
+function setInitialButtonText() {
+  const storedBtnText = localStorage.getItem(LOCAL_STORAGE_KEY)
+  /*
+    'if' statement here ensures that function will only run
+    after text has already been stored.
+  */
+  if (storedBtnText) {
+    btn.textContent = storedBtnText
+  }
+}
+setInitialButtonText()
+```
 
 ---
 
