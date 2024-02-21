@@ -14,6 +14,7 @@
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 - [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
+- [Get Selected Option Value and Text](#get-selected-option-value-and-text)
 
 ---
 
@@ -670,6 +671,53 @@ function setInitialButtonText() {
   }
 }
 setInitialButtonText()
+```
+
+---
+
+## Get Selected Option Value and Text
+
+```HTML
+<form>
+    <select name="select-nums-list" id="select-nums-list">
+        <option value="none">Select a number</option>
+        <option value="0">Zero</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+    </select>
+</form>
+
+<!-- Output: -->
+<ul>
+    <li><b>Selected option value: </b><span id="selected-num-value"></span></li>
+    <li><b>Selected option text: </b><span id="selected-num-text"></span></li>
+</ul>
+```
+
+```JavaScript
+const selectNumsList = document.getElementById("select-nums-list")
+const selectedNumValue = document.getElementById("selected-num-value")
+const selectedNumText = document.getElementById("selected-num-text")
+
+getSelectedOptionValueAndText(selectNumsList, selectedNumValue, selectedNumText)
+
+function getSelectedOptionValueAndText(select, value, text) {
+    select.addEventListener("change", e => {
+        const optionValue = e.target.value
+        const optionText = e.target.options[e.target.selectedIndex].text
+        if (optionValue === "none") {
+            value.textContent = ""
+            text.textContent = ""
+        } else {
+            value.textContent = optionValue
+            text.textContent = optionText
+        }
+    })
+}
+
 ```
 
 ---
