@@ -721,6 +721,8 @@ function getSelectedOptionValueAndText(select, value, text) {
 
 ```
 
+- [CodePen](https://codepen.io/pen/)
+
 ---
 
 ## Multiple HTML details: Close other opened details on click
@@ -769,7 +771,7 @@ function closeOtherOpenedDetails(summaries) {
 }
 ```
 
-- [Codepen](https://codepen.io/Naj-codepen/pen/abMeXRw)
+- [CodePen](https://codepen.io/Naj-codepen/pen/abMeXRw)
 
 ---
 
