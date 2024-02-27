@@ -755,17 +755,17 @@ const summaryItems = document.querySelectorAll("[data-details-group] summary")
 closeOtherOpenedDetails(summaryItems)
 
 function closeOtherOpenedDetails(summaries) {
-    summaries.forEach((summary) => {
-        summary.addEventListener("click", (e) => {
-            summaries.forEach((summary) => {
-                const details = summary.closest("details")
-                const summaryClicked = e.target.closest("details")
-                if (details != summaryClicked) {
-                    details.removeAttribute("open")
-                }
-            })
-        })
+  summaries.forEach((summary) => {
+    summary.addEventListener("click", (e) => {
+      summaries.forEach((summary) => {
+        const details = summary.closest("details")
+        const summaryClicked = e.target.closest("details")
+        if (details != summaryClicked) {
+          details.removeAttribute("open")
+        }
+      })
     })
+  })
 }
 ```
 
