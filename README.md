@@ -15,6 +15,7 @@
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 - [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
 - [Get Selected Option Value and Text](#get-selected-option-value-and-text)
+- [Multiple HTML details: Close other opened details on click](#multiple-html-details-close-other-opened-details-on-click)
 
 ---
 
@@ -719,6 +720,56 @@ function getSelectedOptionValueAndText(select, value, text) {
 }
 
 ```
+
+---
+
+## Multiple HTML details: Close other opened details on click
+
+> [!NOTE]
+> On clicking again, the selected `details` item will also close itself.
+
+```CSS
+summary { cursor: pointer; }
+```
+
+```HTML
+<section data-details-group>
+    <h2>Details</h2>
+    <details>
+        <summary>Summary title #1</summary>
+        <p>Lorem ipsum dolor sit amet.</p>
+    </details>
+    <details>
+        <summary>Summary title #2</summary>
+        <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</p>
+    </details>
+    <details>
+        <summary>Summary title #3</summary>
+        <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor. Lorem ipsum dolor sit.</p>
+    </details>
+</section>
+```
+
+```JavaScript
+const summaryItems = document.querySelectorAll("[data-details-group] summary")
+closeOtherOpenedDetails(summaryItems)
+
+function closeOtherOpenedDetails(summaries) {
+    summaries.forEach((summary) => {
+        summary.addEventListener("click", (e) => {
+            summaries.forEach((summary) => {
+                const details = summary.closest("details")
+                const summaryClicked = e.target.closest("details")
+                if (details != summaryClicked) {
+                    details.removeAttribute("open")
+                }
+            })
+        })
+    })
+}
+```
+
+- [Codepen](https://codepen.io/Naj-codepen/pen/abMeXRw)
 
 ---
 
