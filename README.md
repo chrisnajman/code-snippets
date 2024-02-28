@@ -7,6 +7,7 @@
 - [@media (hover: hover)](#media-hover-hover)
 - [Typographical Flow](#typographical-flow)
 - [Centred, Variable Max-width Container](#centred-variable-max-width-container)
+- [Centre absolutely positioned ::after element](#centre-absolutely-positioned-after-element)
 
 ---
 
@@ -211,6 +212,61 @@ html {
     <p>Some text.</p>
     <p>Some text.</p>
 </article>
+```
+
+---
+
+## Centre absolutely positioned `::after` element
+
+Centres both vertically and horizontally.
+
+To only centre horizontally, use `margin-inline: auto;` in place of `margin: auto;`.
+
+[Demo on CodePen](https://codepen.io/Naj-codepen/pen/LYvPvNo)
+
+```HTML
+<div class="container"></div>
+```
+
+```CSS
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+.container {
+    position: relative;
+    width: 10rem;
+    aspect-ratio: 1;
+
+    /* Styling */
+    background: #000;
+    border-radius: 100vw;
+    padding: 1.6rem 2rem;
+}
+
+.container::after {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    inset: 0;
+    /*
+        Center horizontally:
+        margin-inline: auto;
+    */
+
+    /* Center both vertically and horizontally: */
+    margin: auto;
+
+    /* Styling */
+    font-size: 4rem;
+    content: "\2705";
+}
 ```
 
 ---
