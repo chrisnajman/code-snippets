@@ -1,21 +1,35 @@
 # Code Snippets
 
+---
+
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
-- [Set Multiple Attributes](#set-multiple-attributes)
-- [Global Event Listener](#global-event-listener)
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
 - [@media (hover: hover)](#media-hover-hover)
+- [Typographical Flow](#typographical-flow)
+- [Centred, Variable Max-width Container](#centred-variable-max-width-container)
+
+---
+
+- [Set Multiple Attributes](#set-multiple-attributes)
+- [Global Event Listener](#global-event-listener)
 - [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
+- [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
+
+---
+
 - [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
 - [Accessible details/summary 'accordion' group](#accessible-detailssummary-accordion-group)
+- [Get Selected Option Value and Text](#get-selected-option-value-and-text)
+
+---
+
 - [Clear local storage](#clear-local-storage)
 - [Delete Local Storage Keys](#delete-local-storage-keys)
 - [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
-- [Typographical Flow](#typographical-flow)
-- [Centred, Variable Max-width Container](#centred-variable-max-width-container)
-- [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
+
+---
+
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
-- [Get Selected Option Value and Text](#get-selected-option-value-and-text)
 
 ---
 
@@ -74,6 +88,129 @@ btnChangeBodyBg.addEventListener("click", () => {
 <html lang="en" style>
 
 <!-- Etc. -->
+```
+
+---
+
+## Perfectly-rounded buttons
+
+```HTML
+<button type="button">Button</button>
+```
+
+```CSS
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+button {
+    all: unset;
+    background: blue;
+    color: white;
+    font-family: system-ui;
+    font-weight: 600;
+    font-size: 2rem;
+    padding: 1.6rem 2.4rem;
+
+    /**
+      Perfectly rounded left and right edges:
+    **/
+    border-radius: 100vw;
+}
+```
+
+---
+
+## `@media (hover: hover)`
+
+Targets only those devices which support `:hover` and excludes those which don't, e.g. mobiles and tablets.
+
+Useful if you find that a `:hover` state 'sticks' on mobile/tablet.
+
+```CSS
+li a {
+    border-bottom: 5px solid blue;
+}
+
+/* Excludes mobiles and tablets from trying to :hover */
+@media (hover: hover) {
+    li a:hover {
+        border-bottom-color: red;
+    }
+}
+```
+
+---
+
+## Typographical Flow
+
+The `flow` class will:
+
+- add `margin-top: 1em` to _all_ elements _after_ the first child of the container,
+- space the elements out proportionately, based on the font-size of the elements (which is why `em` rather than `rem` is used).
+
+```CSS
+* {
+    margin: 0;
+}
+
+.flow > * + * {
+    margin-top: 1em;
+    /* em NOT rem & margin-top NOT margin bottom */
+}
+```
+
+```HTML
+<article class="flow">
+    <h2>Main Heading</h2><!-- NO margin-top -->
+    <p>Some text.</p><!-- HAS margin-top -->
+    <p>Some text.</p><!-- HAS margin-top -->
+    <p>Some text.</p><!-- HAS margin-top -->
+    <!-- etc -->
+</article>
+
+```
+
+---
+
+## Centred, Variable Max-width Container
+
+Ensures space on the left and right of the container once the `max-width` threshold has been crossed.
+
+Note: No padding required on the container.
+
+```CSS
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+.container {
+    /* Locally-scoped CSS variables */
+    --_content-max-width: 120rem; /* i.e. 120 X 10px = 1200px */
+    --_content-space-outside: 2rem;
+
+    width: min(var(--_content-max-width), 100% - var(--_content-space-outside) * 2);
+    margin-inline: auto;
+}
+```
+
+```HTML
+<article class="container">
+    <h2>Main Heading</h2>
+    <p>Some text.</p>
+    <p>Some text.</p>
+    <p>Some text.</p>
+</article>
 ```
 
 ---
@@ -252,62 +389,6 @@ For a more detailed discussion see [StackOverflow, JavaScript global event liste
 
 ---
 
-## Perfectly-rounded buttons
-
-```HTML
-<button type="button">Button</button>
-```
-
-```CSS
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 10px;
-}
-
-button {
-    all: unset;
-    background: blue;
-    color: white;
-    font-family: system-ui;
-    font-weight: 600;
-    font-size: 2rem;
-    padding: 1.6rem 2.4rem;
-
-    /**
-      Perfectly rounded left and right edges:
-    **/
-    border-radius: 100vw;
-}
-```
-
----
-
-## `@media (hover: hover)`
-
-Targets only those devices which support `:hover` and excludes those which don't, e.g. mobiles and tablets.
-
-Useful if you find that a `:hover` state 'sticks' on mobile/tablet.
-
-```CSS
-li a {
-    border-bottom: 5px solid blue;
-}
-
-/* Excludes mobiles and tablets from trying to :hover */
-@media (hover: hover) {
-    li a:hover {
-        border-bottom-color: red;
-    }
-}
-```
-
----
-
 ## If statement vs Conditional (ternary) operator
 
 **Ternary**: composed of three.
@@ -349,6 +430,27 @@ btnCaption.addEventListener("click", e => {
     // Will toggle the <figcaption> text.
 
 })
+```
+
+---
+
+## Quick Fix for 'Uncaught TypeError: ITEM is undefined'
+
+If the console prints an error message along the lines of ...
+
+```
+Uncaught TypeError: ITEM is undefined
+```
+
+... a _potential_ quick fix is to wrap the offending ITEM in an `if` statement:
+
+```JavaScript
+
+if (ITEM) {
+
+    // ITEM code ...
+
+}
 ```
 
 ---
@@ -478,6 +580,55 @@ function accessibleDetails(details) {
         })
     })
 }
+```
+
+---
+
+## Get Selected Option Value and Text
+
+[Demo on CodePen](https://codepen.io/Naj-codepen/pen/gOyYPjR)
+
+```HTML
+<form>
+    <select name="select-nums-list" id="select-nums-list">
+        <option value="none">Select a number</option>
+        <option value="0">Zero</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+    </select>
+</form>
+
+<!-- Output: -->
+<ul>
+    <li><b>Selected option value: </b><span id="selected-num-value"></span></li>
+    <li><b>Selected option text: </b><span id="selected-num-text"></span></li>
+</ul>
+```
+
+```JavaScript
+const selectNumsList = document.getElementById("select-nums-list")
+const selectedNumValue = document.getElementById("selected-num-value")
+const selectedNumText = document.getElementById("selected-num-text")
+
+getSelectedOptionValueAndText(selectNumsList, selectedNumValue, selectedNumText)
+
+function getSelectedOptionValueAndText(select, value, text) {
+    select.addEventListener("change", e => {
+        const optionValue = e.target.value
+        const optionText = e.target.options[e.target.selectedIndex].text
+        if (optionValue === "none") {
+            value.textContent = ""
+            text.textContent = ""
+        } else {
+            value.textContent = optionValue
+            text.textContent = optionText
+        }
+    })
+}
+
 ```
 
 ---
@@ -641,94 +792,6 @@ setInitialButtonText()
 
 ---
 
-## Typographical Flow
-
-The `flow` class will:
-
-- add `margin-top: 1em` to _all_ elements _after_ the first child of the container,
-- space the elements out proportionately, based on the font-size of the elements (which is why `em` rather than `rem` is used).
-
-```CSS
-* {
-    margin: 0;
-}
-
-.flow > * + * {
-    margin-top: 1em;
-    /* em NOT rem & margin-top NOT margin bottom */
-}
-```
-
-```HTML
-<article class="flow">
-    <h2>Main Heading</h2><!-- NO margin-top -->
-    <p>Some text.</p><!-- HAS margin-top -->
-    <p>Some text.</p><!-- HAS margin-top -->
-    <p>Some text.</p><!-- HAS margin-top -->
-    <!-- etc -->
-</article>
-
-```
-
----
-
-## Centred, Variable Max-width Container
-
-Ensures space on the left and right of the container once the `max-width` threshold has been crossed.
-
-Note: No padding required on the container.
-
-```CSS
-* {
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 10px;
-}
-
-.container {
-    /* Locally-scoped CSS variables */
-    --_content-max-width: 120rem; /* i.e. 120 X 10px = 1200px */
-    --_content-space-outside: 2rem;
-
-    width: min(var(--_content-max-width), 100% - var(--_content-space-outside) * 2);
-    margin-inline: auto;
-}
-```
-
-```HTML
-<article class="container">
-    <h2>Main Heading</h2>
-    <p>Some text.</p>
-    <p>Some text.</p>
-    <p>Some text.</p>
-</article>
-```
-
----
-
-## Quick Fix for 'Uncaught TypeError: ITEM is undefined'
-
-If the console prints an error message along the lines of ...
-
-```
-Uncaught TypeError: ITEM is undefined
-```
-
-... a _potential_ quick fix is to wrap the offending ITEM in an `if` statement:
-
-```JavaScript
-
-if (ITEM) {
-
-    // ITEM code ...
-
-}
-```
-
----
-
 ## GitHub Markdown: Notes and Warnings
 
 ### Markdown
@@ -766,55 +829,6 @@ if (ITEM) {
 
 > [!CAUTION]
 > Negative potential consequences of an action.
-
----
-
-## Get Selected Option Value and Text
-
-[Demo on CodePen](https://codepen.io/Naj-codepen/pen/gOyYPjR)
-
-```HTML
-<form>
-    <select name="select-nums-list" id="select-nums-list">
-        <option value="none">Select a number</option>
-        <option value="0">Zero</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        <option value="4">Four</option>
-        <option value="5">Five</option>
-    </select>
-</form>
-
-<!-- Output: -->
-<ul>
-    <li><b>Selected option value: </b><span id="selected-num-value"></span></li>
-    <li><b>Selected option text: </b><span id="selected-num-text"></span></li>
-</ul>
-```
-
-```JavaScript
-const selectNumsList = document.getElementById("select-nums-list")
-const selectedNumValue = document.getElementById("selected-num-value")
-const selectedNumText = document.getElementById("selected-num-text")
-
-getSelectedOptionValueAndText(selectNumsList, selectedNumValue, selectedNumText)
-
-function getSelectedOptionValueAndText(select, value, text) {
-    select.addEventListener("change", e => {
-        const optionValue = e.target.value
-        const optionText = e.target.options[e.target.selectedIndex].text
-        if (optionValue === "none") {
-            value.textContent = ""
-            text.textContent = ""
-        } else {
-            value.textContent = optionValue
-            text.textContent = optionText
-        }
-    })
-}
-
-```
 
 ---
 
