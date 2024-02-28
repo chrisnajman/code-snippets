@@ -12,7 +12,7 @@
 
 - [Set Multiple Attributes](#set-multiple-attributes)
 - [Global Event Listener](#global-event-listener)
-- [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
+- [If, if/else statement vs Conditional (ternary) operator](#if-ifelse-statement-vs-conditional-ternary-operator)
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 
 ---
@@ -389,7 +389,7 @@ For a more detailed discussion see [StackOverflow, JavaScript global event liste
 
 ---
 
-## If statement vs Conditional (ternary) operator
+## If, if/else statement vs Conditional (ternary) operator
 
 **Ternary**: composed of three.
 
@@ -399,7 +399,7 @@ For a more detailed discussion see [StackOverflow, JavaScript global event liste
     <figcaption id="image-caption">Caption 1</figcaption>
 </figure>
 
-<button type="button" id="btn-caption">Add caption</button>
+<button type="button" id="btn-caption">Change caption</button>
 ```
 
 ```JavaScript
@@ -408,26 +408,34 @@ const btnCaption = document.getElementById("btn-caption")
 
 btnCaption.addEventListener("click", e => {
 
-    // EITHER:
+    // EITHER ...
     // If statement
+    if (imageCaption.textContent === "Caption 1") {
+        imageCaption.textContent = "Caption 2"
+        return
+    }
+    imageCaption.textContent = "Caption 1"
+
+    // OR ...
+    // If/else statement
     if (imageCaption.textContent === "Caption 1") {
         imageCaption.textContent = "Caption 2"
     } else {
         imageCaption.textContent = "Caption 1"
     }
 
-    // OR:
+    // OR ...
     // Conditional (Ternary) operator V.1
     imageCaption.textContent === "Caption 1"
         ? (imageCaption.textContent = "Caption 2")
         : (imageCaption.textContent = "Caption 1")
 
-    // OR:
+    // OR ...
     // Conditional (Ternary) operator V.2
     imageCaption.textContent =
         imageCaption.textContent === "Caption 1" ? "Caption 2" : "Caption 1"
 
-    // Will toggle the <figcaption> text.
+    // ... will toggle the <figcaption> text.
 
 })
 ```
