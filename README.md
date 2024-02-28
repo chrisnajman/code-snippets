@@ -391,10 +391,11 @@ details.addEventListener("toggle", () => {
 
 ## Accessible details/summary 'accordion' group
 
-`aria-controls` and `aria-expanded` markup on `summary`.
+[Demo on CodePen](https://codepen.io/Naj-codepen/pen/abMeXRw)
 
-> [!NOTE]
-> On clicking again, the selected `details` item will also close itself.
+- Initially, all summaries are closed.
+- Once a summary is opened, clicking on another item will close the previous one.
+- Click again on an opened summary and it will self-close.
 
 ```CSS
 summary { cursor: pointer; }
@@ -478,8 +479,6 @@ function accessibleDetails(details) {
     })
 }
 ```
-
-- [CodePen](https://codepen.io/Naj-codepen/pen/abMeXRw)
 
 ---
 
@@ -772,6 +771,8 @@ if (ITEM) {
 
 ## Get Selected Option Value and Text
 
+[Demo on CodePen](https://codepen.io/Naj-codepen/pen/gOyYPjR)
+
 ```HTML
 <form>
     <select name="select-nums-list" id="select-nums-list">
@@ -814,8 +815,6 @@ function getSelectedOptionValueAndText(select, value, text) {
 }
 
 ```
-
-- [CodePen](https://codepen.io/pen/)
 
 ---
 
