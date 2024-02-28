@@ -7,15 +7,15 @@
 - [@media (hover: hover)](#media-hover-hover)
 - [If statement vs Conditional (ternary) operator](#if-statement-vs-conditional-ternary-operator)
 - [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
+- [Accessible details/summary 'accordion' group](#accessible-detailssummary-accordion-group)
 - [Clear local storage](#clear-local-storage)
+- [Delete Local Storage Keys](#delete-local-storage-keys)
+- [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
 - [Typographical Flow](#typographical-flow)
 - [Centred, Variable Max-width Container](#centred-variable-max-width-container)
-- [Delete Local Storage Keys](#delete-local-storage-keys)
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
-- [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
 - [Get Selected Option Value and Text](#get-selected-option-value-and-text)
-- [Multiple HTML details: Close other opened details on click](#multiple-html-details-close-other-opened-details-on-click)
 
 ---
 
@@ -389,6 +389,100 @@ details.addEventListener("toggle", () => {
 
 ---
 
+## Accessible details/summary 'accordion' group
+
+`aria-controls` and `aria-expanded` markup on `summary`.
+
+> [!NOTE]
+> On clicking again, the selected `details` item will also close itself.
+
+```CSS
+summary { cursor: pointer; }
+
+/**
+  Hides 'Open' and 'Close' from view.
+  Exposes the text content of label 'data-summary-label'
+  to screen readers only.
+*/
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(0);
+    border: 0;
+}
+```
+
+```HTML
+<section data-details-group>
+    <h2>Details</h2>
+    <details id="details-1">
+        <summary aria-controls="#details-1" aria-expanded="false">
+            <span data-summary-label class="visually-hidden">Open </span>Summary title #1
+        </summary>
+        <p>Lorem ipsum dolor sit amet.</p>
+    </details>
+    <details id="details-2">
+        <summary aria-controls="#details-2" aria-expanded="false">
+            <span data-summary-label class="visually-hidden">Open </span>Summary title #2
+        </summary>
+        <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</p>
+    </details>
+    <details id="details-3">
+        <summary aria-controls="#details-3" aria-expanded="false">
+            <span data-summary-label class="visually-hidden">Open </span>Summary title #3
+        </summary>
+        <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor. Lorem ipsum dolor sit.</p>
+    </details>
+</section>
+```
+
+```JavaScript
+const detailsItems = document.querySelectorAll("[data-details-group] details")
+const summaryItems = document.querySelectorAll("[data-details-group] summary")
+
+closeOtherOpenedDetails(summaryItems)
+accessibleDetails(detailsItems)
+
+function closeOtherOpenedDetails(summaries) {
+    summaries.forEach((summary) => {
+        summary.addEventListener("click", (e) => {
+            summaries.forEach((summary) => {
+                const details = summary.closest("details")
+                const summaryClicked = e.target.closest("details")
+                if (details != summaryClicked) {
+                    details.removeAttribute("open")
+                }
+            })
+        })
+    })
+}
+
+// Adds accessibility information for screen readers
+function accessibleDetails(details) {
+    details.forEach(detail => {
+        detail.addEventListener("toggle", () => {
+            const summary = detail.querySelector("summary")
+            const summaryLabel = detail.querySelector("[data-summary-label]")
+            if (detail.open) {
+                summary.setAttribute("aria-expanded", "true")
+                summaryLabel.textContent = "Close "
+            } else {
+                summary.setAttribute("aria-expanded", "false")
+                summaryLabel.textContent = "Open "
+            }
+        })
+    })
+}
+```
+
+- [CodePen](https://codepen.io/Naj-codepen/pen/abMeXRw)
+
+---
+
 ## Clear Local Storage
 
 Clicking the button launches a `confirm` dialog. If you click 'yes', local storage will be cleared.
@@ -409,6 +503,141 @@ clearLocalStorage.addEventListener("click", () => {
         window.localStorage.clear()
     }
 })
+```
+
+---
+
+## Delete Local Storage Keys
+
+```HTML
+<button class="delete-all-entries" data-delete-all-entries>
+    Delete all entries
+</button>
+```
+
+```JavaScript
+const deleteAllBtn = document.querySelector("[data-delete-all-entries]")
+```
+
+### Delete All Keys
+
+It's easy to delete _all_ local storage, but that's not always what you want.
+
+For instance, you could be running multiple apps from the local file system (`file:///C:/Users/...` on Windows) each app using differently named local storage keys.
+If you deleted all local storage, all the apps would return to their default state.
+
+```JavaScript
+function deleteEntries() {
+    deleteAllBtn.addEventListener("click", () => {
+
+        if (window.confirm("Do you really want to delete all entries?")) {
+
+            window.localStorage.clear()
+            window.location.reload()
+
+        }
+
+    })
+}
+deleteEntries()
+```
+
+### Delete Single Specific Key
+
+In this example, only the `LOCAL_STORAGE_KEY-table-entries` key will be deleted, leaving any other keys intact.
+
+```JavaScript
+function deleteEntries() {
+    deleteAllBtn.addEventListener("click", () => {
+
+        if (window.confirm("Do you really want to delete this key?")) {
+
+            const keyToRemove = "LOCAL_STORAGE_KEY-table-entries"
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i)
+                if (key.startsWith(keyToRemove)) {
+                    localStorage.removeItem(key)
+                }
+            }
+
+            window.location.reload()
+        }
+
+    })
+}
+deleteEntries()
+```
+
+### Delete Multiple Specific Keys
+
+In this example, both the `LOCAL_STORAGE_KEY-table-entries` and `LOCAL_STORAGE_KEY-button-state ` keys will be deleted, leaving all other keys intact.
+
+```JavaScript
+function deleteEntries() {
+    deleteAllBtn.addEventListener("click", () => {
+        if (window.confirm("Do you really want to delete these 2 keys?")) {
+
+            const keysToRemove = ["LOCAL_STORAGE_KEY-table-entries","LOCAL_STORAGE_KEY-button-state"]
+
+            keysToRemove.forEach((keyToRemove) => {
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i)
+                    if (key.startsWith(keyToRemove)) {
+                        localStorage.removeItem(key)
+                    }
+                }
+            })
+
+            window.location.reload()
+        }
+    })
+}
+deleteEntries()
+```
+
+---
+
+## Save Button Toggle Text to Local Storage
+
+```HTML
+<button id="btn">Button text A</button>
+```
+
+```JavaScript
+const LOCAL_STORAGE_KEY = "button-toggle-text"
+const btn = document.getElementById("btn")
+
+// Save button toggle text to local storage on button click
+btn.addEventListener("click", (e) => {
+  if (e.target.textContent === "Button text A") {
+    localStorageButtonText(e, "Button text B")
+  } else if (e.target.textContent === "Button text B") {
+    localStorageButtonText(e, "Button text A")
+  }
+})
+
+function localStorageButtonText(e, btnText) {
+  localStorage.setItem(LOCAL_STORAGE_KEY, btnText)
+  const storedBtnText = localStorage.getItem(LOCAL_STORAGE_KEY)
+  e.target.textContent = storedBtnText
+}
+
+/*
+  Set initial button text on page load,
+  if text has been saved, i.e. button has already been clicked.
+*/
+function setInitialButtonText() {
+  const storedBtnText = localStorage.getItem(LOCAL_STORAGE_KEY)
+  /*
+    'if' statement here ensures that function will only run
+    after text has already been stored.
+  */
+  if (storedBtnText) {
+    btn.textContent = storedBtnText
+  }
+}
+setInitialButtonText()
 ```
 
 ---
@@ -480,97 +709,6 @@ html {
 
 ---
 
-## Delete Local Storage Keys
-
-```HTML
-<button class="delete-all-entries" data-delete-all-entries>
-    Delete all entries
-</button>
-```
-
-```JavaScript
-const deleteAllBtn = document.querySelector("[data-delete-all-entries]")
-```
-
-### Delete All Keys
-
-It's easy to delete _all_ local storage, but that's not always what you want.
-
-For instance, you could be running multiple apps from the local file system (`file:///C:/Users/...` on Windows) each app using differently named local storage keys.
-If you deleted all local storage, all the apps would return to their default state.
-
-```JavaScript
-function deleteEntries() {
-    deleteAllBtn.addEventListener("click", () => {
-
-        if (window.confirm("Do you really want to delete all entries?")) {
-
-            window.localStorage.clear()
-            window.location.reload()
-
-        }
-
-    })
-}
-deleteEntries()
-```
-
-### Delete Single Specific Key
-
-In this example, only the `LOCAL_STORAGE_KEY-table-entries` key will be deleted, leaving any other keys intact.
-
-```JavaScript
-function deleteEntries() {
-    deleteAllBtn.addEventListener("click", () => {
-
-        if (window.confirm("Do you really want to delete all entries?")) {
-
-            const keyToRemove = "LOCAL_STORAGE_KEY-table-entries"
-
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i)
-                if (key.startsWith(keyToRemove)) {
-                    localStorage.removeItem(key)
-                }
-            }
-
-            window.location.reload()
-        }
-
-    })
-}
-deleteEntries()
-```
-
-### Delete Multiple Specific Keys
-
-In this example, both the `LOCAL_STORAGE_KEY-table-entries` and `LOCAL_STORAGE_KEY-button-state ` keys will be deleted, leaving all other keys intact.
-
-```JavaScript
-function deleteEntries() {
-    deleteAllBtn.addEventListener("click", () => {
-        if (window.confirm("Do you really want to delete all entries?")) {
-
-            const keysToRemove = ["LOCAL_STORAGE_KEY-table-entries","LOCAL_STORAGE_KEY-button-state"]
-
-            keysToRemove.forEach((keyToRemove) => {
-                for (let i = 0; i < localStorage.length; i++) {
-                    const key = localStorage.key(i)
-                    if (key.startsWith(keyToRemove)) {
-                        localStorage.removeItem(key)
-                    }
-                }
-            })
-
-            window.location.reload()
-        }
-    })
-}
-deleteEntries()
-```
-
----
-
 ## Quick Fix for 'Uncaught TypeError: ITEM is undefined'
 
 If the console prints an error message along the lines of ...
@@ -632,50 +770,6 @@ if (ITEM) {
 
 ---
 
-## Save Button Toggle Text to Local Storage
-
-```HTML
-<button id="btn">Button text A</button>
-```
-
-```JavaScript
-const LOCAL_STORAGE_KEY = "button-toggle-text"
-const btn = document.getElementById("btn")
-
-// Save button toggle text to local storage on button click
-btn.addEventListener("click", (e) => {
-  if (e.target.textContent === "Button text A") {
-    localStorageButtonText(e, "Button text B")
-  } else if (e.target.textContent === "Button text B") {
-    localStorageButtonText(e, "Button text A")
-  }
-})
-
-function localStorageButtonText(e, btnText) {
-  localStorage.setItem(LOCAL_STORAGE_KEY, btnText)
-  const storedBtnText = localStorage.getItem(LOCAL_STORAGE_KEY)
-  e.target.textContent = storedBtnText
-}
-
-/*
-  Set initial button text on page load,
-  if text has been saved, i.e. button has already been clicked.
-*/
-function setInitialButtonText() {
-  const storedBtnText = localStorage.getItem(LOCAL_STORAGE_KEY)
-  /*
-    'if' statement here ensures that function will only run
-    after text has already been stored.
-  */
-  if (storedBtnText) {
-    btn.textContent = storedBtnText
-  }
-}
-setInitialButtonText()
-```
-
----
-
 ## Get Selected Option Value and Text
 
 ```HTML
@@ -722,56 +816,6 @@ function getSelectedOptionValueAndText(select, value, text) {
 ```
 
 - [CodePen](https://codepen.io/pen/)
-
----
-
-## Multiple HTML details: Close other opened details on click
-
-> [!NOTE]
-> On clicking again, the selected `details` item will also close itself.
-
-```CSS
-summary { cursor: pointer; }
-```
-
-```HTML
-<section data-details-group>
-    <h2>Details</h2>
-    <details>
-        <summary>Summary title #1</summary>
-        <p>Lorem ipsum dolor sit amet.</p>
-    </details>
-    <details>
-        <summary>Summary title #2</summary>
-        <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</p>
-    </details>
-    <details>
-        <summary>Summary title #3</summary>
-        <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor. Lorem ipsum dolor sit.</p>
-    </details>
-</section>
-```
-
-```JavaScript
-const summaryItems = document.querySelectorAll("[data-details-group] summary")
-closeOtherOpenedDetails(summaryItems)
-
-function closeOtherOpenedDetails(summaries) {
-  summaries.forEach((summary) => {
-    summary.addEventListener("click", (e) => {
-      summaries.forEach((summary) => {
-        const details = summary.closest("details")
-        const summaryClicked = e.target.closest("details")
-        if (details != summaryClicked) {
-          details.removeAttribute("open")
-        }
-      })
-    })
-  })
-}
-```
-
-- [CodePen](https://codepen.io/Naj-codepen/pen/abMeXRw)
 
 ---
 
