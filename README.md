@@ -30,6 +30,10 @@
 
 ---
 
+- [React Proptypes for Image Src](#react-proptypes-for-image-src)
+
+---
+
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 
 ---
@@ -852,6 +856,63 @@ function setInitialButtonText() {
   }
 }
 setInitialButtonText()
+```
+
+---
+
+## React Proptypes for Image `src`
+
+Proptypes for both locally- and externally-sourced files.
+
+### Child Component
+
+```JSX
+import PropTypes from "prop-types"
+
+function Image(props) {
+  return (
+      <img
+        src={props.image}
+        alt=""
+      />
+  )
+}
+
+Image.propTypes = {
+  image: PropTypes.oneOfType([
+    PropTypes.string, // image sourced from 'assets/'
+    PropTypes.instanceOf(URL), // image sourced from external URL
+  ]),
+}
+
+export default Image
+```
+
+### Parent Component
+
+```JSX
+import Image from "./Image.jsx"
+import AssetsImage from "../../assets/image.jpg"
+
+function ImagesContainer() {
+  return (
+    <section>
+      <Image image={AssetsImage} />
+      <Image image="https://path-to-external-file/image.jpg" />
+    </section>
+  )
+}
+
+export default ImagesContainer
+```
+
+### HTML Output
+
+```HTML
+<section>
+    <img src="/src/assets/image.jpg" alt="">
+    <img src="https://path-to-external-file/image.jpg" alt="">
+</section>
 ```
 
 ---
