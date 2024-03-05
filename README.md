@@ -1107,8 +1107,6 @@ function ComponentParent() {
 
 export default ComponentParent
 
-export default ComponentParent
-
 ```
 
 ---
