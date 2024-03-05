@@ -920,17 +920,15 @@ export default ImagesContainer
 
 ## React Proptypes and Default Proptypes for an Array of Objects
 
-### Component
-
 > [!NOTE]
-> Default values for items are included in conditional statements, e.g.
+> Component.jsx: Default values for items are included in conditional statements, e.g.
 
 ```JSX
 <b>Name</b>: {item.name ? item.name : "No name supplied"}
 ```
 
 > [!NOTE]
-> The placeholder image is imported and also included in a conditional statement:
+> Component.jsx: The placeholder image is imported and also included in a conditional statement:
 
 ```JSX
 import placeholderProfilePic from "../../assets/staff/placeholder.jpg"
@@ -940,6 +938,8 @@ import placeholderProfilePic from "../../assets/staff/placeholder.jpg"
     alt={item.name ? item.name : "Placeholder profile image"}
 />
 ```
+
+### Component
 
 ```JSX
 import PropTypes from "prop-types"
