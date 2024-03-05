@@ -1077,7 +1077,7 @@ function ComponentParent() {
 
   const managers = staffAll.filter((member) => member.category === "Management")
 
-  const notManagers = staffAll.filter((member) => member.category === "Staff")
+  const notManagers = staffAll.filter((member) => member.category !== "Management")
 
   return (
     <section>
