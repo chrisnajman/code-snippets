@@ -939,7 +939,7 @@ import placeholderProfilePic from "../../assets/staff/placeholder.jpg"
 />
 ```
 
-### Component
+### Component.jsx
 
 ```JSX
 import PropTypes from "prop-types"
@@ -1007,7 +1007,7 @@ export default Component
 
 ```
 
-### Parent
+### ComponentParent.jsx
 
 ```JSX
 import Component from "./Component"
