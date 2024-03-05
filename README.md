@@ -31,6 +31,7 @@
 ---
 
 - [React Proptypes for Image Src](#react-proptypes-for-image-src)
+- [React Proptypes and Default Proptypes for an Array of Objects](#react-proptypes-and-default-proptypes-for-an-array-of-objects)
 
 ---
 
@@ -913,6 +914,201 @@ export default ImagesContainer
     <img src="/src/assets/image.jpg" alt="">
     <img src="https://path-to-external-file/image.jpg" alt="">
 </section>
+```
+
+---
+
+## React Proptypes and Default Proptypes for an Array of Objects
+
+### Component
+
+> [!NOTE]
+> Default values for items are included in conditional statements, e.g.
+
+```JSX
+<b>Name</b>: {item.name ? item.name : "No name supplied"}
+```
+
+> [!NOTE]
+> The placeholder image is imported and also included in a conditional statement:
+
+```JSX
+import placeholderProfilePic from "../../assets/staff/placeholder.jpg"
+
+<img
+    src={item.profilePic ? item.profilePic : placeholderProfilePic}
+    alt={item.name ? item.name : "Placeholder profile image"}
+/>
+```
+
+```JSX
+import PropTypes from "prop-types"
+import placeholderProfilePic from "../../assets/staff/placeholder.jpg"
+
+function Component(props) {
+  const itemList = props.items
+
+  const staffListItemsAll = itemList.map((item) => (
+    <li key={item.id}>
+      <img
+        src={item.profilePic ? item.profilePic : placeholderProfilePic}
+        alt={item.name ? item.name : "Placeholder profile image"}
+      />
+      <ul>
+        <li>
+          <b>Name</b>: {item.name ? item.name : "No name supplied"}
+        </li>
+        <li>
+          <b>Age</b>: {item.age ? item.age : "No age supplied"}
+        </li>
+        <li>
+          <b>Status</b>: {item.category ? item.category : "Status unknown"}
+        </li>
+        <li>
+          <b>Description</b>:{" "}
+          {item.description ? item.description : "No description supplied"}
+        </li>
+      </ul>
+    </li>
+  ))
+  return (
+    <>
+      <h3>{props.title}</h3>
+      <ul>{staffListItemsAll}</ul>
+      <hr />
+    </>
+  )
+}
+
+Component.propTypes = {
+  title: PropTypes.string,
+  // PropTypes for array of objects:
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      age: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      profilePic: PropTypes.oneOfType([
+        PropTypes.string, // image sourced from assets/
+        PropTypes.instanceOf(URL), // image sourced from external URL
+      ]),
+    })
+  ),
+}
+
+Component.defaultProps = {
+  title: "No title supplied",
+  items: [],
+}
+
+export default Component
+
+```
+
+### Parent
+
+```JSX
+import Component from "./Component"
+import StaffPic1 from "../../assets/staff/staffpic-1.jpg"
+import StaffPic2 from "../../assets/staff/staffpic-2.jpg"
+import StaffPic3 from "../../assets/staff/staffpic-3.jpg"
+import StaffPic4 from "../../assets/staff/staffpic-4.jpg"
+import StaffPic5 from "../../assets/staff/staffpic-5.jpg"
+
+function ComponentParent() {
+  const staffAll = [
+    {
+      id: 1,
+      name: "John Self",
+      age: 40,
+      description: "CEO. Does not suffer fools gladly.",
+      category: "Management",
+      profilePic: StaffPic1,
+    },
+    {
+      id: 2,
+      name: "Jane Doe",
+      age: 25,
+      description: "Quiet quitter.",
+      category: "Staff",
+      profilePic: StaffPic2,
+    },
+    {
+      id: 3,
+      name: "Helmut Kopf",
+      age: 33,
+      description: "Systems analyst, currently under investigation by the Met.",
+      category: "Management",
+      profilePic: StaffPic3,
+    },
+    {
+      id: 4,
+      name: "Susan Queue",
+      age: 70,
+      description: "Former rock star, hobbies include gardening.",
+      category: "Staff",
+      profilePic: StaffPic4,
+    },
+    {
+      id: 5,
+      name: "Chris Walken",
+      age: 61,
+      description: "Accountant. No relation to the famous film star.",
+      category: "Staff",
+      profilePic: StaffPic5,
+    },
+    {
+      id: 6,
+      name: "Abigail Fiesta",
+      age: 23,
+      description: "HR consultant working from home in Hammersmith, London.",
+      category: "Staff",
+      // img path is from external source:
+      profilePic:
+        "https://clipground.com/images/woman-profile-picture-clipart-9.jpg",
+    },
+    // Only id supplied.
+    {
+      id: 7,
+    },
+  ]
+
+  const managers = staffAll.filter((member) => member.category === "Management")
+
+  const notManagers = staffAll.filter((member) => member.category === "Staff")
+
+  return (
+    <section>
+      <h2>Staff List</h2>
+      {staffAll.length > 0 && (
+        <Component
+          items={staffAll}
+          title="All Staff"
+        />
+      )}
+      {managers.length > 0 && (
+        <Component
+          items={managers}
+          title="Management"
+        />
+      )}
+      {notManagers.length > 0 && (
+        <Component
+          items={notManagers}
+          title="Not management"
+        />
+      )}
+      <Component />
+    </section>
+  )
+}
+
+export default ComponentParent
+
+export default ComponentParent
+
 ```
 
 ---
