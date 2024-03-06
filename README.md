@@ -32,6 +32,7 @@
 
 - [React Proptypes for Image Src](#react-proptypes-for-image-src)
 - [React Proptypes and Default Proptypes for an Array of Objects](#react-proptypes-and-default-proptypes-for-an-array-of-objects)
+- [React Button Component with props](#react-button-component-with-props)
 
 ---
 
@@ -1107,6 +1108,79 @@ function ComponentParent() {
 
 export default ComponentParent
 
+```
+
+---
+
+## React Button Component with props
+
+### Button.jsx
+
+```JSX
+import PropTypes from "prop-types"
+
+function Button(props) {
+  return (
+    <button
+      style={props.style}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </button>
+  )
+}
+
+Button.propTypes = {
+  style: PropTypes.object,
+  children: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+}
+
+export default Button
+```
+
+### App.jsx
+
+```JSX
+import Button from "./Button.jsx"
+
+function App() {
+  const handleClick = () => {
+    console.log("Button was clicked!")
+  }
+
+  // Function with parameter
+  const handleClick2 = (e) => {
+    console.log(e.target.textContent)
+  }
+
+  return (
+    <Button
+      onClick={handleClick}
+      style={{
+        background: "red",
+        color: "white",
+        cursor: "pointer",
+      }}
+    >
+      Click Me
+    </Button>
+
+    // Button with parameter
+    <Button
+      onClick={(e) => handleClick2(e)}
+      style={{
+        background: "blue",
+        color: "white",
+        cursor: "pointer",
+      }}
+    >
+      Click Me (e)
+    </Button>
+  )
+}
+
+export default App
 ```
 
 ---
