@@ -1227,7 +1227,7 @@ export default App
 
 ## Temporarily Disable PropTypes
 
-When using `props` in a 'jsx' file, **VSCode** prompts for `proptypes` by default. If you don't add them immediately, the file is marked in red. This can be annoying. To put off adding `proptypes` until later, add the following code at the very top of the file:
+When using `props` in a 'jsx' file, **VSCode** prompts for `proptypes` definitions by default. If you don't add them immediately, the file is marked in red. This can be annoying. To put off defining `proptypes` until later, add the following code at the very top of the file:
 
 ```jsx
 /* eslint-disable react/prop-types */
