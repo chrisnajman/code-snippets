@@ -33,6 +33,8 @@
 - [React Proptypes for Image Src](#react-proptypes-for-image-src)
 - [React Proptypes and Default Proptypes for an Array of Objects](#react-proptypes-and-default-proptypes-for-an-array-of-objects)
 - [React Button Component with props](#react-button-component-with-props)
+- [Temporarily Disable PropTypes](#temporarily-disable-proptypes)
+- [React Router v6: 'end' replaces 'exact' in NavLink](#react-router-v6-end-replaces-exact-in-navlink)
 
 ---
 
@@ -97,6 +99,8 @@ btnChangeBodyBg.addEventListener("click", () => {
 <!-- Etc. -->
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Perfectly-rounded buttons
@@ -132,6 +136,8 @@ button {
 }
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## `@media (hover: hover)`
@@ -152,6 +158,8 @@ li a {
     }
 }
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -183,6 +191,8 @@ The `flow` class will:
 </article>
 
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -219,6 +229,8 @@ html {
     <p>Some text.</p>
 </article>
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -275,6 +287,8 @@ html {
 }
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Set Multiple Attributes
@@ -309,6 +323,8 @@ console.log(btnSubmit)
 ### Source
 
 [Migel Hewage Nimesha, DelftStack](https://www.delftstack.com/howto/javascript/set-multiple-attributes-to-an-element-using-javascript/)
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -449,6 +465,8 @@ form.append(newTextInput)
 
 For a more detailed discussion see [StackOverflow, JavaScript global event listener not working with focus event](https://stackoverflow.com/questions/75537358/javascript-global-event-listener-not-working-with-focus-event) .
 
+[Back to top](#code-snippets)
+
 ---
 
 ## If, if/else statement vs Conditional (ternary) operator
@@ -502,6 +520,8 @@ btnCaption.addEventListener("click", e => {
 })
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Quick Fix for 'Uncaught TypeError: ITEM is undefined'
@@ -522,6 +542,8 @@ if (ITEM) {
 
 }
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -558,6 +580,8 @@ details.addEventListener("toggle", () => {
     cursor: pointer;
 }
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -652,6 +676,8 @@ function accessibleDetails(details) {
 }
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Get Selected Option Value and Text
@@ -701,6 +727,8 @@ function getSelectedOptionValueAndText(select, value, text) {
 
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Clear Local Storage
@@ -724,6 +752,8 @@ clearLocalStorage.addEventListener("click", () => {
     }
 })
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -816,6 +846,8 @@ function deleteEntries() {
 deleteEntries()
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Save Button Toggle Text to Local Storage
@@ -859,6 +891,8 @@ function setInitialButtonText() {
 }
 setInitialButtonText()
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -916,6 +950,8 @@ export default ImagesContainer
     <img src="https://path-to-external-file/image.jpg" alt="">
 </section>
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -1110,6 +1146,8 @@ export default ComponentParent
 
 ```
 
+[Back to top](#code-snippets)
+
 ---
 
 ## React Button Component with props
@@ -1183,6 +1221,77 @@ function App() {
 export default App
 ```
 
+[Back to top](#code-snippets)
+
+---
+
+## Temporarily Disable PropTypes
+
+When using `props` in a 'jsx' file, **VSCode** prompts for `proptypes` by default. If you don't add them immediately, the file is marked in red. This can be annoying. To put off adding `proptypes` until later, add the following code at the very top of the file:
+
+```jsx
+/* eslint-disable react/prop-types */
+```
+
+Removing it will trigger the `proptypes` prompt once again.
+
+[Back to top](#code-snippets)
+
+---
+
+## React Router v6: 'end' replaces 'exact' in NavLink
+
+Say you have the following 2 routes:
+
+```jsx
+const router = createBrowserRouter([
+  // other code ...
+  {
+    path: "/post",
+    element: <CreatePost />,
+  },
+  {
+    path: "/post/:id",
+    element: <Post />,
+  },
+]}
+```
+
+and in the main navigation, you have the following `NavLink`:
+
+```jsx
+<NavLink
+  to="/post"
+  className={({ isActive }) => {
+    return isActive ? "nav-active" : ""
+  }}
+>
+  Create Post
+</NavLink>
+```
+
+- The path '/post' takes you to a form, where can you create a new post.
+- The path '/post/:id' takes you to a created post, with a url like `/post/1'.
+
+You don't want the 'Create Post' `NavLink` to be highlighted when you go to an actual post, so you can add `end` to the `NavLink`:
+
+```jsx
+<NavLink
+  to="/post"
+  className={({ isActive }) => {
+    return isActive ? "nav-active" : ""
+  }}
+  end // This will limit the url to '/post' only !
+>
+  Create Post
+</NavLink>
+```
+
+> [!NOTE]
+> In React Router < v6, `exact` was used in place of `end`. However, I'm not familiar with the actual details of how you would use `exact` in v5.
+
+[Back to top](#code-snippets)
+
 ---
 
 ## GitHub Markdown: Notes and Warnings
@@ -1223,6 +1332,8 @@ export default App
 > [!CAUTION]
 > Negative potential consequences of an action.
 
+[Back to top](#code-snippets)
+
 ---
 
 ## Testing
@@ -1234,3 +1345,5 @@ All snippets tested on Windows 10 with:
 - Microsoft Edge
 
 Each snippet tested in both browser and device views.
+
+[Back to top](#code-snippets)
