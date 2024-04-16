@@ -1333,6 +1333,8 @@ All dynamic images are stored in `/public/animals`.
 > [!WARNING]
 > You must NOT include '/public/' in the file path, or the images won't display.
 
+[Back to top](#code-snippets)
+
 ---
 
 ## GitHub Markdown: Notes and Warnings
