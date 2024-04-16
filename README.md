@@ -35,6 +35,7 @@
 - [React Button Component with props](#react-button-component-with-props)
 - [Temporarily Disable PropTypes](#temporarily-disable-proptypes)
 - [React Router v6: 'end' replaces 'exact' in NavLink](#react-router-v6-end-replaces-exact-in-navlink)
+- [Vite/React: Dynamic Image Paths](#vitereact-dynamic-image-paths)
 
 ---
 
@@ -1291,6 +1292,46 @@ You don't want the 'Create Post' `NavLink` to be highlighted when you go to an a
 > In React Router < v6, `exact` was used in place of `end`. However, I'm not familiar with the actual details of how you would use `exact` in v5.
 
 [Back to top](#code-snippets)
+
+---
+
+## Vite/React: Dynamic Image Paths
+
+For dynamic image paths, store the images in the `/public/` folder. You can put them in a sub-folder, in this case `animals/`.
+
+### `Parent.jsx`
+
+```jsx
+const animals = [
+  {
+    // Other key/value pairs
+    image: "cat.png",
+    // Other key/value pairs
+  },
+  // More objects...
+]
+```
+
+```jsx
+<Animal
+  // Other props
+  src={animals.image}
+  // Other props
+/>
+```
+
+### `Child.jsx`
+
+```jsx
+<img src={`/site-name/animals/${src}`} />
+```
+
+### The `/public/` Folder
+
+All dynamic images are stored in `/public/animals`.
+
+> [!WARNING]
+> You must NOT include '/public/' in the file path, or the images won't display.
 
 ---
 
