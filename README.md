@@ -1299,7 +1299,7 @@ You don't want the 'Create Post' `NavLink` to be highlighted when you go to an a
 
 For dynamic image paths, store the images in the `/public/` folder. You can put them in a sub-folder, in this case `animals/`.
 
-### `Parent.jsx`
+### Parent Component: `Animals.jsx`
 
 ```jsx
 const animals = [
@@ -1320,7 +1320,7 @@ const animals = [
 />
 ```
 
-### `Child.jsx`
+### Child Component: `Animal.jsx`
 
 ```jsx
 <img src={`/site-name/animals/${src}`} />
