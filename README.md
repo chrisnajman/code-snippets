@@ -36,6 +36,7 @@
 - [Temporarily Disable PropTypes](#temporarily-disable-proptypes)
 - [React Router v6: 'end' replaces 'exact' in NavLink](#react-router-v6-end-replaces-exact-in-navlink)
 - [Vite/React: Dynamic Image Paths](#vitereact-dynamic-image-paths)
+- [Pass Object as `Props`](#pass-object-as-props)
 
 ---
 
@@ -1332,6 +1333,99 @@ All dynamic images are stored in `/public/animals`.
 
 > [!WARNING]
 > You must NOT include '/public/' in the file path, or the images won't display.
+
+[Back to top](#code-snippets)
+
+---
+
+## Pass Object as `Props`
+
+To pass `props` as an object from `Parent.jsx` to the `Child.jsx` component, the names in `Child.jsx` must be identical to the keys in the data object.
+
+### Data Structure: `data.js`
+
+```js
+export default [
+  {
+    id: 1,
+    firstName: "John",
+    lastName: "Smith",
+    address: {
+      street: "High Street",
+      houseNumber: 44,
+      postCode: "SE33 4LG",
+    },
+    taxId: "1234ABCD",
+  },
+
+  // More objects
+]
+```
+
+### Parent Component: `Parent.jsx`
+
+```jsx
+import Child from "./Child"
+import data from "./data"
+
+function Parent() {
+  const items = data.map((item) => {
+    return (
+      <Child
+        key={item.id}
+        item={item} // Pass props as object to Child.jsx
+      />
+    )
+  })
+  return <ul>{items}</ul>
+}
+
+export default Parent
+```
+
+### Child Component: `Child.jsx`
+
+```jsx
+import PropTypes from "prop-types"
+
+/* 
+  Access key values in data.js using object dot notation, 
+  prefixed by prop object {item}, e.g.
+    item.firstName, etc.
+  Get a nested key value, e.g.
+    item.address.street
+*/
+
+function Child({ item }) {
+  return (
+    <li>
+      <h2>{`${item.firstName} ${item.lastName}`}</h2>
+      <h3>Address</h3>
+      <p>
+        <span>{`${item.address.houseNumber} ${item.address.street},`}</span>
+        <span>{item.address.postCode}</span>
+      </p>
+      <h3>Tax ID</h3>
+      <p>{item.taxId}</p>
+    </li>
+  )
+}
+
+Child.propTypes = {
+  item: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    address: PropTypes.shape({
+      street: PropTypes.string,
+      houseNumber: PropTypes.number,
+      postCode: PropTypes.string,
+    }),
+    taxId: PropTypes.string,
+  }),
+}
+
+export default Child
+```
 
 [Back to top](#code-snippets)
 
