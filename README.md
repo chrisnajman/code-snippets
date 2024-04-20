@@ -37,6 +37,7 @@
 - [React Router v6: 'end' replaces 'exact' in NavLink](#react-router-v6-end-replaces-exact-in-navlink)
 - [Vite/React: Dynamic Image Paths](#vitereact-dynamic-image-paths)
 - [Pass Object as `Props`](#pass-object-as-props)
+- [Simple Array: Use second `index` Parameter of `.map()` Method to Supply Component's `key` Value](#simple-array-use-second-index-parameter-of-map-method-to-supply-components-key-value)
 
 ---
 
@@ -1425,6 +1426,76 @@ Child.propTypes = {
 }
 
 export default Child
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Simple Array: Use second `index` Parameter of `.map()` Method to Supply Component's `key` Value
+
+In the absence of an `id` (which would probably be present in an array of objects) use `.map(item, index)`.
+
+```jsx
+function App() {
+  const itemsArray = ["Item 1", "Item 2"]
+
+  const items = itemsArray.map((item, index) => {
+    return <p key={item[index]}>{item}</p>
+  })
+
+  return <>{items}</>
+}
+
+export default App
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Get Random URL from an Array of Objects
+
+### `imageData.js`
+
+```json
+export default {
+  data: {
+    images: [
+      {
+        id: "1",
+        title: "Image 1",
+        url: "https://randomImage.com/random-image-1.jpg",
+      },
+      {
+        id: "2",
+        title: "Image 2",
+        url: "https://randomImage.com/random-image-2.jpg",
+      },
+      // many more objects ...
+    ]
+  }
+}
+```
+
+### `LogRandomUrls.jsx`
+
+```jsx
+import imageData from "../imageData.js"
+
+function LogRandomUrls() {
+  function getImageUrls() {
+    const imageArray = imageData.data.images
+    const randomNumber = Math.floor(Math.random() * imageArray.length)
+    const url = imageArray[randomNumber].url
+
+    console.log(url)
+  }
+
+  return <button onClick={getImageUls}>Log random URL</button>
+}
+
+export default LogRandomUrls
 ```
 
 [Back to top](#code-snippets)
