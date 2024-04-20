@@ -1459,7 +1459,7 @@ export default App
 
 ### `imageData.js`
 
-```json
+```js
 export default {
   data: {
     images: [
@@ -1474,8 +1474,8 @@ export default {
         url: "https://randomImage.com/random-image-2.jpg",
       },
       // many more objects ...
-    ]
-  }
+    ],
+  },
 }
 ```
 
