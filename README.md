@@ -1493,7 +1493,7 @@ function LogRandomUrls() {
     console.log(url)
   }
 
-  return <button onClick={getImageUls}>Log random URL</button>
+  return <button onClick={getImageUrls}>Log random URL</button>
 }
 
 export default LogRandomUrls
