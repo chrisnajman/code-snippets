@@ -38,6 +38,7 @@
 - [Vite/React: Dynamic Image Paths](#vitereact-dynamic-image-paths)
 - [Pass Object as `Props`](#pass-object-as-props)
 - [Simple Array: Use second `index` Parameter of `.map()` Method to Supply Component's `key` Value](#simple-array-use-second-index-parameter-of-map-method-to-supply-components-key-value)
+- [Get Random URL from an Array of Objects](#get-random-url-from-an-array-of-objects)
 
 ---
 
