@@ -40,6 +40,7 @@
 - [Simple Array: Use second `index` Parameter of `.map()` Method to Supply Component's `key` Value](#simple-array-use-second-index-parameter-of-map-method-to-supply-components-key-value)
 - [Get Random URL from an Array of Objects](#get-random-url-from-an-array-of-objects)
 - [Set Array `state`](#set-array-state)
+- [Set Object `state`](#set-object-state)
 
 ---
 
@@ -1529,6 +1530,52 @@ function Items() {
 }
 
 export default Items
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Set Object `state`
+
+```jsx
+import { useState } from "react"
+
+function Contact() {
+  const [contact, setContact] = useState({
+    firstName: "John",
+    lastName: "Doe",
+    phone: "+44 (207) 391 4023",
+    email: "name@example.com",
+    isFavorite: false, // To be changed
+  })
+
+  let starIcon = contact.isFavorite ? "star-filled.png" : "star-empty.png"
+
+  function toggleFavorite() {
+    setContact((prevContact) => ({
+      ...prevContact,
+      isFavorite: !prevContact.isFavorite, // Set new value
+    }))
+  }
+
+  return (
+    <div>
+      {/* Toggle new value*/}
+      <img
+        src={`../images/${starIcon}`}
+        onClick={toggleFavorite}
+      />
+      <ul>
+        <li>{`Name: ${contact.firstName} ${contact.lastName}`}</li>
+        <li>{`Tel: ${contact.phone}`}</li>
+        <li>{`Email: ${contact.email}`}</li>
+      </ul>
+    </div>
+  )
+}
+
+export default Contact
 ```
 
 [Back to top](#code-snippets)
