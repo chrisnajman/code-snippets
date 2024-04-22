@@ -39,6 +39,7 @@
 - [Pass Object as `Props`](#pass-object-as-props)
 - [Simple Array: Use second `index` Parameter of `.map()` Method to Supply Component's `key` Value](#simple-array-use-second-index-parameter-of-map-method-to-supply-components-key-value)
 - [Get Random URL from an Array of Objects](#get-random-url-from-an-array-of-objects)
+- [Set Array `state`](#set-array-state)
 
 ---
 
@@ -1497,6 +1498,37 @@ function LogRandomUrls() {
 }
 
 export default LogRandomUrls
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Set Array `state`
+
+```jsx
+import { useState } from "react"
+
+function Items() {
+  const [itemsArray, setItemsArray] = useState(["Item 1", "Item 2"])
+
+  function addItem() {
+    setItemsArray((prevItemsArray) => {
+      return [...prevItemsArray, `Item ${prevItemsArray.length + 1}`]
+    })
+  }
+
+  const listItems = itemsArray.map((item) => <li key={item}>{item}</li>)
+
+  return (
+    <div>
+      <button onClick={addItem}>Add Item</button>
+      <ul>{listItems}</ul>
+    </div>
+  )
+}
+
+export default Items
 ```
 
 [Back to top](#code-snippets)
