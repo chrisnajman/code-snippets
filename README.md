@@ -39,8 +39,9 @@
 - [Pass Object as `Props`](#pass-object-as-props)
 - [Simple Array: Use second `index` Parameter of `.map()` Method to Supply Component's `key` Value](#simple-array-use-second-index-parameter-of-map-method-to-supply-components-key-value)
 - [Get Random URL from an Array of Objects](#get-random-url-from-an-array-of-objects)
-- [Set Array `state`](#set-array-state)
-- [Set Object `state`](#set-object-state)
+- [Set Array State](#set-array-state)
+- [Set Object State](#set-object-state)
+- [Setting State from Child Components](#setting-state-from-child-components)
 
 ---
 
@@ -1505,7 +1506,7 @@ export default LogRandomUrls
 
 ---
 
-## Set Array `state`
+## Set Array State
 
 ```jsx
 import { useState } from "react"
@@ -1536,7 +1537,7 @@ export default Items
 
 ---
 
-## Set Object `state`
+## Set Object State
 
 ```jsx
 import { useState } from "react"
@@ -1576,6 +1577,68 @@ function Contact() {
 }
 
 export default Contact
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Setting State from Child Components
+
+### `Favourite.jsx`
+
+```jsx
+import { useState } from "react"
+import Star from "./Star"
+
+export default function Favourite() {
+  const [status, setStatus] = useState({
+    isFavorite: false,
+  })
+
+  function toggleFavorite() {
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      isFavorite: !prevStatus.isFavorite,
+    }))
+  }
+
+  return (
+    <Star
+      isFilled={status.isFavorite}
+      handleClick={toggleFavorite}
+    />
+  )
+}
+```
+
+### `Star.jsx`
+
+```jsx
+import PropTypes from "prop-types"
+
+function Star({ isFilled, handleClick }) {
+  const starIcon = isFilled ? "star-filled" : "star-empty"
+  const buttonLabel = isFilled ? "Unmark as favourite" : "Mark as favourite"
+
+  return (
+    <button
+      onClick={handleClick}
+      aria-label={buttonLabel}
+      aria-pressed={isFilled}
+    >
+      <img
+        src={`/${starIcon}.svg`}
+        alt="Star icon"
+      />
+    </button>
+  )
+}
+
+Star.propTypes = {
+  isFilled: PropTypes.bool,
+  handleClick: PropTypes.func.isRequired,
+}
 ```
 
 [Back to top](#code-snippets)
