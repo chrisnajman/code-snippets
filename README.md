@@ -42,6 +42,7 @@
 - [Set Array State](#set-array-state)
 - [Set Object State](#set-object-state)
 - [Setting State from Child Components](#setting-state-from-child-components)
+- [`useEffect()` Clean Up Function](#useeffect-clean-up-function)
 
 ---
 
@@ -1638,6 +1639,64 @@ function Star({ isFilled, handleClick }) {
 Star.propTypes = {
   isFilled: PropTypes.bool,
   handleClick: PropTypes.func.isRequired,
+}
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## `useEffect()` Clean Up Function
+
+- When the button state is set to `true` , the `window.innerWidth` is displayed in the `h1`.
+- When it is toggled to `false`, the `h1` is hidden.
+- However, if the clean up function is not included (in this case, removing the event listener) `window.innerWidth` will continue to run in the background, even if its output is not displayed.
+
+```jsx
+import PropTypes from "prop-types"
+import { useState, useEffect } from "react"
+
+export default function App() {
+  const [show, setShow] = useState(true)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  function toggle() {
+    setShow((prevShow) => !prevShow)
+  }
+
+  return (
+    <div className="container">
+      <button onClick={toggle}>Toggle WindowTracker</button>
+      {show && (
+        <WindowTracker
+          windowState={windowWidth}
+          setWindowState={setWindowWidth}
+        />
+      )}
+    </div>
+  )
+}
+
+function WindowTracker({ windowState, setWindowState }) {
+  useEffect(() => {
+    function watchWidth() {
+      setWindowState(window.innerWidth)
+    }
+
+    window.addEventListener("resize", watchWidth)
+
+    // Clean up function
+    return function () {
+      window.removeEventListener("resize", watchWidth)
+    }
+  }, [setWindowState])
+
+  return <h1>Window width: {windowState}</h1>
+}
+
+WindowTracker.propTypes = {
+  windowState: PropTypes.number,
+  setWindowState: PropTypes.func,
 }
 ```
 
