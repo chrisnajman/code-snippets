@@ -43,6 +43,7 @@
 - [Set Object State](#set-object-state)
 - [Setting State from Child Components](#setting-state-from-child-components)
 - [`useEffect()` Clean Up Function](#useeffect-clean-up-function)
+- [`useState()` or `useState()` and `useEffect()`? Style-switcher Example](#usestate-or-usestate-and-useeffect-style-switcher-example)
 
 ---
 
@@ -1698,6 +1699,125 @@ WindowTracker.propTypes = {
   windowState: PropTypes.number,
   setWindowState: PropTypes.func,
 }
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## `useState()` or `useState()` and `useEffect()`? Style-switcher Example
+
+- If you want to e.g. simply toggle the style of a web page, use `useState()`.
+- If you want to e.g. toggle the style of a web page AND save the selected style to `localstorage`, use `useEffect()` as well as `useState()`.
+
+### `App.jsx` `useState()` Only
+
+```jsx
+import { useState } from "react"
+import BtnStyleSwitcher from "./components/BtnStyleSwitcher"
+
+function App() {
+  const [mode, setMode] = useState(true)
+
+  function handleMode() {
+    setMode((prevMode) => !prevMode)
+  }
+  return (
+    <>
+      <BtnStyleSwitcher
+        handleClick={handleMode}
+        mode={mode}
+      />
+      <div className={`content ${mode ? "darkmode" : ""}`}>
+        <p>
+          Page content ... ipsum dolor sit amet consectetur adipisicing elit.
+          Eaque impedit repudiandae necessitatibus sequi accusamus unde sed
+          animi similique, quia maxime alias nihil nesciunt? Incidunt dolorem
+          cum deserunt, laboriosam atque asperiores iusto autem voluptate
+          laborum, mollitia pariatur aliquam deleniti consequuntur error veniam
+          nulla vel et unde quae aut sed culpa sapiente.
+        </p>
+      </div>
+    </>
+  )
+}
+
+export default App
+```
+
+### `App.jsx` `useState()` and `useEffect()`
+
+```jsx
+import { useState, useEffect } from "react"
+import BtnStyleSwitcher from "./components/BtnStyleSwitcher"
+
+function App() {
+  const [mode, setMode] = useState(true)
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("darkmode", mode)
+    /*
+      Any code for e.g. local storage would go here...
+    */
+  }, [mode])
+
+  function handleMode() {
+    setMode((prevMode) => !prevMode)
+  }
+
+  return (
+    <>
+      <BtnStyleSwitcher
+        handleClick={handleMode}
+        mode={mode}
+      />
+      <div className="content">
+        <p>
+          Page content ... ipsum dolor sit amet consectetur adipisicing elit.
+          Eaque impedit repudiandae necessitatibus sequi accusamus unde sed
+          animi similique, quia maxime alias nihil nesciunt? Incidunt dolorem
+          cum deserunt, laboriosam atque asperiores iusto autem voluptate
+          laborum, mollitia pariatur aliquam deleniti consequuntur error veniam
+          nulla vel et unde quae aut sed culpa sapiente.
+        </p>
+      </div>
+    </>
+  )
+}
+
+export default App
+```
+
+### `BtnStyleSwitcher.jsx`
+
+```jsx
+import PropTypes from "prop-types"
+import { MdDarkMode, MdLightMode } from "react-icons/md"
+
+function BtnStyleSwitcher({ handleClick, mode }) {
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-pressed={mode ? "true" : "false"}
+      aria-label="Toggle dark mode"
+    >
+      {mode ? (
+        <MdDarkMode aria-hidden="true" />
+      ) : (
+        <MdLightMode aria-hidden="true" />
+      )}
+      <span>Darkmode: {mode ? "on" : "off"}</span>
+    </button>
+  )
+}
+
+BtnStyleSwitcher.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  mode: PropTypes.bool,
+}
+
+export default BtnStyleSwitcher
 ```
 
 [Back to top](#code-snippets)
