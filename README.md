@@ -152,7 +152,7 @@ button {
 
 ## `@media (hover: hover)`
 
-Targets only those devices which support `:hover` and excludes those which don't, e.g. mobiles and tablets.
+Targets only those devices which support `:hover` and excludes those which don't, e.g., mobiles and tablets.
 
 Useful if you find that a `:hover` state 'sticks' on mobile/tablet.
 
@@ -574,18 +574,17 @@ console.log(arr)
 
 ```
 
-Running this will result in, e.g. `[1, 2, 6, 4, 1, 4, 1, 6, 1, 2]`.
+Running this will result in, e.g., `[1, 2, 6, 4, 1, 4, 1, 6, 1, 2]`.
 
 > [!NOTE]
 > Each time you run the code, you'll get a different result (within the specified range).
 
 ### How `Math.ceil(Math.random() * n)` Works
 
-- `Math.random()` generates a random floating point number between `0`(inclusive) and `1` (exclusive).
+- `Math.random()` generates a random floating-point number between `0`(inclusive) and `1` (exclusive).
 
 > [!NOTE]
-> 'inclusive': `0.0` can be generated.
-> 'exclusive': `1.0` cannot be generated, only a number approaching it, e.g. `0.999`.
+> '**Inclusive**': `0.0` can be generated. '**Exclusive**': `1.0` cannot be generated, only a number approaching it, e.g., `0.999`.
 
 - `Math.ceil(Math.random() * n)` (where `n = 6`) scales up the random number by 6, resulting in a new floating-point number between `0` (inclusive) and `6` (exclusive).
 
@@ -1011,7 +1010,7 @@ export default ImagesContainer
 ## React Proptypes and Default Proptypes for an Array of Objects
 
 > [!NOTE]
-> Component.jsx: Default values for items are included in conditional statements, e.g.
+> Component.jsx: Default values for items are included in conditional statements, e.g.,
 
 ```JSX
 <b>Name</b>: {item.name ? item.name : "No name supplied"}
@@ -1441,9 +1440,9 @@ import PropTypes from "prop-types"
 
 /* 
   Access key values in data.js using object dot notation, 
-  prefixed by prop object {item}, e.g.
+  prefixed by prop object {item}, e.g.,
     item.firstName, etc.
-  Get a nested key value, e.g.
+  Get a nested key value, e.g.,
     item.address.street
 */
 
@@ -1751,8 +1750,8 @@ WindowTracker.propTypes = {
 
 ## `useState()` or `useState()` and `useEffect()`? Style-switcher Example
 
-- If you want to e.g. simply toggle the style of a web page, use `useState()`.
-- If you want to e.g. toggle the style of a web page AND save the selected style to `localstorage`, use `useEffect()` as well as `useState()`.
+- If you want to e.g., simply toggle the style of a web page, use `useState()`.
+- If you want to e.g., toggle the style of a web page AND save the selected style to `localstorage`, use `useEffect()` as well as `useState()`.
 
 ### `App.jsx` `useState()` Only
 
@@ -1801,7 +1800,7 @@ function App() {
   useEffect(() => {
     document.documentElement.classList.toggle("darkmode", mode)
     /*
-      Any code for e.g. local storage would go here...
+      Any code for e.g., local storage would go here...
     */
   }, [mode])
 
