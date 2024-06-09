@@ -45,6 +45,7 @@
 - [Setting State from Child Components](#setting-state-from-child-components)
 - [`useEffect()` Clean Up Function](#useeffect-clean-up-function)
 - [`useState()` or `useState()` and `useEffect()`? Style-switcher Example](#usestate-or-usestate-and-useeffect-style-switcher-example)
+- [Get and Map Data with `async await` and `.map()`](#get-and-map-data-with-async-await-and-map)
 
 ---
 
@@ -1864,6 +1865,91 @@ export default BtnStyleSwitcher
 ```
 
 [Back to top](#code-snippets)
+
+---
+
+## Get and Map Data with `async await` and `.map()`
+
+```jsx
+import { useState, useEffect } from "react"
+
+/** 
+  - Data source: "https://some-server/items"
+
+  - Data structure:
+
+ {
+  items: [
+    {
+      "id": "1",
+      "title": "Title #1",
+      "imageUrlWebp": "https://images.com/img1.webp",
+      "imageUrlPng": "https://images.com/img1.png",
+      "width": 200,
+      "height": 200,
+      "description": "Description #1",
+    },
+    {
+      "id": "2",
+      "title": "Title #2",
+      "imageUrlWebp": "https://images.com/img2.webp",
+      "imageUrlPng": "https://images.com/img2.png",
+      "width": 200,
+      "height": 200,
+      "description": "Description #2",
+    },
+    etc,
+  ],
+}
+*/
+
+function Items() {
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    async function getItems() {
+      try {
+        const res = await fetch("https://some-server/items")
+        const itemsData = await res.json()
+        setItems(itemsData.items)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getItems()
+  }, [])
+
+  const itemsList = items.map((item) => {
+    return (
+      <li key={item.id}>
+        <h2>{item.title}</h2>
+        <picture>
+          <source
+            srcSet={item.imageUrlWebp}
+            type="image/webp"
+          />
+          <img
+            src={item.imageUrlPng}
+            alt={item.name}
+            loading="lazy"
+            width="200"
+            height="200"
+          />
+        </picture>
+        <p>{item.description}</p>
+      </li>
+    )
+  })
+  return (
+    <>
+      <h1>Items</h1>
+      {items ? <ul>{itemsList}</ul> : "Loading ..."}
+    </>
+  )
+}
+
+export default Items
+```
 
 ---
 
