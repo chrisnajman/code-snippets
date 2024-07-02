@@ -46,6 +46,7 @@
 - [`useEffect()` Clean Up Function](#useeffect-clean-up-function)
 - [`useState()` or `useState()` and `useEffect()`? Style-switcher Example](#usestate-or-usestate-and-useeffect-style-switcher-example)
 - [Get and Map Data with `async await` and `.map()`](#get-and-map-data-with-async-await-and-map)
+- [Loading Component with Animated Spinner](#loading-component-with-animated-spinner)
 
 ---
 
@@ -1949,6 +1950,114 @@ function Items() {
 }
 
 export default Items
+```
+
+---
+
+## Loading Component with Animated Spinner
+
+- Src: https://loading.io/css/
+
+### Component
+
+```jsx
+import PropTypes from "prop-types"
+function Loading({ title }) {
+  return (
+    <>
+      <p className="visually-hidden">Loading {title}...</p>
+      <div
+        className="loading"
+        aria-hidden="true"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </>
+  )
+}
+
+Loading.propTypes = {
+  title: PropTypes.string,
+}
+
+export default Loading
+```
+
+### Page.jsx
+
+```jsx
+<Loading title="Loading..." />
+```
+
+### CSS
+
+```css
+.loading {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-inline: auto;
+}
+.loading div {
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid currentColor;
+  border-radius: 50%;
+  animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: currentColor transparent transparent transparent;
+}
+.loading div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.loading div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.loading div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Screenreader only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(0);
+  border: 0;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0ms !important;
+  }
+}
 ```
 
 ---
