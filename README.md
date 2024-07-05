@@ -22,6 +22,7 @@
 - [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
 - [Accessible details/summary 'accordion' group](#accessible-detailssummary-accordion-group)
 - [Get Selected Option Value and Text](#get-selected-option-value-and-text)
+- [Safari and List Semantics](#safari-and-list-semantics)
 
 ---
 
@@ -780,6 +781,46 @@ function getSelectedOptionValueAndText(select, value, text) {
 }
 
 ```
+
+[Back to top](#code-snippets)
+
+---
+
+## Safari and List Semantics
+
+If you add `list-style: none`to a `ul`, or `list-style-type : none` to an `li` and listen to the output in a screen reader, with the page loaded in the _Safari_ browser, the semantic value is removed. This means that a list of items won't be identified as such; they will merely be a collection of items.
+
+Here are a couple of fixes, the second one being the best, in my opinion:
+
+### 1) Add a `role` to the `ul`
+
+```CSS
+ul { list-style: none;}
+
+/* OR: */
+
+li { list-style-type: none;}
+```
+
+```HTML
+
+<ul role="list">
+  <li>Item</li>
+  <li>Item</li>
+  <li>Item</li>
+</ul>
+
+```
+
+Src: ["Fixing" Lists](https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html)
+
+### 2) `list-style-type` accepts a string value
+
+```CSS
+li { list-style-type: ""}
+```
+
+Src: [Here’s what I didn’t know about list-style-type](https://www.matuzo.at/blog/heres-what-i-didnt-know-about-list-style-type/)
 
 [Back to top](#code-snippets)
 
@@ -2059,6 +2100,8 @@ export default Loading
   }
 }
 ```
+
+[Back to top](#code-snippets)
 
 ---
 
