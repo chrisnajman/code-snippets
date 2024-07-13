@@ -2108,6 +2108,8 @@ export default Loading
 
 ## Set Page Title with Component
 
+Src: [Rohit Yadav - Adding Page Titles to React App](https://dev.to/rohitnirban/adding-page-titles-to-react-app-23oe)
+
 This sets the `<title>` in `index.html` per component.
 
 ### `PageTitle.jsx`
@@ -2174,7 +2176,7 @@ function App() {
 export default App
 ```
 
----
+[Back to top](#code-snippets)
 
 ## GitHub Markdown: Notes and Warnings
 
