@@ -48,6 +48,7 @@
 - [`useState()` or `useState()` and `useEffect()`? Style-switcher Example](#usestate-or-usestate-and-useeffect-style-switcher-example)
 - [Get and Map Data with `async await` and `.map()`](#get-and-map-data-with-async-await-and-map)
 - [Loading Component with Animated Spinner](#loading-component-with-animated-spinner)
+- [Set Page Title with Component](#set-page-title-with-component)
 
 ---
 
@@ -2102,6 +2103,76 @@ export default Loading
 ```
 
 [Back to top](#code-snippets)
+
+---
+
+## Set Page Title with Component
+
+This sets the `<title>` in `index.html` per component.
+
+### `PageTitle.jsx`
+
+```jsx
+import PropTypes from "prop-types"
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+
+const PageTitle = ({ title }) => {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = title
+  }, [location, title])
+
+  return null
+}
+
+PageTitle.propTypes = {
+  title: PropTypes.string,
+}
+
+export default PageTitle
+```
+
+### `App.jsx`
+
+```jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import About from "./pages/About"
+import PageTitle from "./components/PageTitle"
+
+import "./server"
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <PageTitle title="Home page" />
+              <Home />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <PageTitle title="About page" />
+              <About />
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
+```
 
 ---
 
