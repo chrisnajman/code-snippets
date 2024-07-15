@@ -16,7 +16,7 @@
 - [If, if/else statement vs Conditional (ternary) operator](#if-ifelse-statement-vs-conditional-ternary-operator)
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [`Math.ceil(Math.random() * n)`: Explanation](#mathceilmathrandom--n-explanation)
-- [Replace Spaces with Dashes in String, then Convert to Lower Case](#replace-spaces-with-dashes-in-string-then-convert-to-lower-case)
+- [String Manipulation](#string-manipulation)
 
 ---
 
@@ -606,16 +606,38 @@ Running this will result in, e.g., `[1, 2, 6, 4, 1, 4, 1, 6, 1, 2]`.
 
 ---
 
-## Replace Spaces with Dashes in String, then Convert to Lower Case
+## String Manipulation
+
+### Initial string
 
 ```JavaScript
-let string = "Now is the time for All Good men to Come to the Aid of the Party"
-
-string = string.replace(/\s+/g, '-').toLowerCase()
-console.log(string)
+const string = "Sample Sentence with a Few Words";
+console.log(string);
 ```
 
-**Output**: "now-is-the-time-for-all-good-men-to-come-to-the-aid-of-the-party"
+**Output**: "Sample Sentence with a Few Words"
+
+### Replace spaces with dashes, and convert to lower case
+
+```JavaScript
+const modifiedString = string.replace(/\s+/g, '-').toLowerCase();
+console.log(modifiedString);
+```
+
+**Output**: "sample-sentence-with-a-few-words"
+
+### Replace dashes with spaces, and convert to sentence case
+
+```JavaScript
+const finalString = modifiedString.replace(/-/g, " ").replace(
+    /\w\S*/g,
+    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+);
+
+console.log(finalString);
+```
+
+**Output**: "Sample Sentence with a Few Words"
 
 [Back to top](#code-snippets)
 
