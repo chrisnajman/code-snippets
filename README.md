@@ -8,6 +8,8 @@
 - [Typographical Flow](#typographical-flow)
 - [Centred, Variable Max-width Container](#centred-variable-max-width-container)
 - [Centre absolutely positioned ::after element](#centre-absolutely-positioned-after-element)
+- [Pixels to Rems](#pixels-to-rems)
+- [Nested Grid Unusual Behaviour Fixed by `min-width:0`](#nested-grid-unusual-behaviour-fixed-by-min-width0)
 
 ---
 
@@ -301,6 +303,142 @@ html {
     content: "\2705";
 }
 ```
+
+[Back to top](#code-snippets)
+
+---
+
+## Pixels to Rems
+
+Previously, I've addressed this by setting `font-size: 10px` in `root:`, then setting `rems` in the following way, e.g:
+
+- `font-size: 1.6rem` (= 16px)
+- `width: 72rem` (= 720px)
+- `padding: 0.8rem 1.2rem` (= 8px, 12px)
+
+etc, etc.
+
+This was to avoid having to calculate `rems` each time I wrote a CSS rule based on the browser's base font size of 16px.
+
+However, I found this method had accessibility concerns: If a user sets his font size settings to, e.g. "Large", the page won't respond.
+
+### Solution
+
+**Assumption**: You're using VSCode Editor.
+
+- Install VSCode extension ["Convert px to rem"](https://marketplace.visualstudio.com/items?itemName=gwanduke.convert-px-to-rem)
+- During development, write all CSS using pixels.
+
+When you're ready to publish:
+
+- `Ctrl+Shift+P` or `Cmd+Shift+P`, type "convert px to rem", then hit the `Enter` key.
+
+**Result**: All pixel values will now be converted to `rems`.
+
+> [!NOTE]
+> I recommend making a copy of the CSS file before you convert (and saving it as, e.g. "stylesPixels.css") so you have a reference if you want to make changes at a later date.
+
+[Back to top](#code-snippets)
+
+---
+
+## Nested Grid Unusual Behaviour Fixed by `min-width:0`
+
+### 1) `items` Grid
+
+I inserted the following code into an HTML page:
+
+```html
+<div class="items">
+  <div class="item">Item</div>
+  <div class="item">Item</div>
+  <div class="item">Item</div>
+  <div class="item">Item</div>
+  <div class="item">Item</div>
+  <!-- etc, etc up to 20 items -->
+</div>
+```
+
+I then applied the following CSS:
+
+```css
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  max-width: 1270px;
+}
+
+.item {
+  aspect-ratio: 3 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
+}
+```
+
+This worked as expected: On wide screens, the items were laid out in columns of 6. Making the window progressively smaller rendered columns of 5, 4, 3, 2 and 1.
+
+### 2) `page-layout` grid.
+
+To layout a page that ensures that the 'footer' always stays at the bottom I always use the following HTML/CSS:
+
+```html
+<div class="page-layout">
+  <header>Header</header>
+  <main>Main content</main>
+  <footer>Footer</footer>
+</div>
+```
+
+```css
+.page-layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100dvh;
+  height: 100vh;
+}
+```
+
+### 3) Importing the `items` grid into the `page-layout` grid
+
+```html
+<div class="page-layout">
+  <header>Header</header>
+  <main>
+    <div class="items">
+      <div class="item">Item</div>
+      <div class="item">Item</div>
+      <div class="item">Item</div>
+      <div class="item">Item</div>
+      <div class="item">Item</div>
+      <!-- etc, etc up to 20 items -->
+    </div>
+  </main>
+  <footer>Footer</footer>
+</div>
+```
+
+**Result**: The `items` grid remained stuck at 6 columns. Narrowing the browser window caused the `item`s to first shrink, ultimately generating horizontal scrollbars when the space runs out.
+
+This is because defining `.page-layout` as a grid container establishes a new grid formatting context. This affects how child elements inside it, including the `.items` grid, are sized and rendered.
+
+### 4) Solution: Add `min-width: 0` to the `main` element
+
+```css
+main {
+  min-width: 0;
+}
+```
+
+#### Why `min-width: 0` works
+
+- In a grid layout, items have a default `min-width: auto`. This causes the grid item (in this case, `main`) to be at least as wide as its content, preventing it from shrinking as the browser window shrinks.
+- Setting `min-width: 0` allows the `main` element to shrink below its content width, thereby allowing the `.items` grid inside it to adjust and reduce the number of columns as the window narrows.
+
+> [!NOTE]
+> Both HTML pages had the usual `<meta name="viewport" content="width=device-width, initial-scale=1.0">` tag in the `head` section.
 
 [Back to top](#code-snippets)
 
