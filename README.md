@@ -401,7 +401,7 @@ To layout a page that ensures that the 'footer' always stays at the bottom I alw
 }
 ```
 
-### 3) Importing the `items` grid into the `page-layout` grid
+### 3) Nesting the `items` grid inside the `page-layout` grid
 
 ```html
 <div class="page-layout">
