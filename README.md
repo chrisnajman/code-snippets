@@ -56,6 +56,7 @@
 ---
 
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
+- [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
 
 ---
 
@@ -2356,6 +2357,8 @@ export default App
 
 [Back to top](#code-snippets)
 
+---
+
 ## GitHub Markdown: Notes and Warnings
 
 ### Markdown
@@ -2393,6 +2396,31 @@ export default App
 
 > [!CAUTION]
 > Negative potential consequences of an action.
+
+[Back to top](#code-snippets)
+
+---
+
+## GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)
+
+### Local Directory:
+
+- `git pull` (This will pull down any changes to `package.json` and `package-lock.json`).
+- Update `deploy.yml` to the correct version (currently v.4)
+- `git add .`
+- `git commit -m "Updated deploy.yml to version 4"`
+- `git push`
+
+### Remote (GitHub) Directory:
+
+- Under "Actions", check that the update action has been successful. Then,
+  - if the "Pages build and deployment" action takes place automatically, check that the corresponding Git Page is displaying correctly after the action has finished.
+  - Else if the "Pages build ..." action has not happened automatically:
+    - Under "Settings > Pages > Branch", change "gh-pages" to "None" and click "Save".
+    - Go to the corresponding Git Page and check that it is now "404".
+    - Go back to "Settings > Pages > Branch", change "None" to "gh-pages" and click "Save".
+    - Under "Actions" check that "pages build and deployment" action has been successful.
+    - Finally, check that the corresponding Git Page is displaying correctly.
 
 [Back to top](#code-snippets)
 
