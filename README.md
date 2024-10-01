@@ -183,9 +183,13 @@ li a {
 
 ## Typographical Flow
 
-The `flow` class will:
+### `flow-em`
 
-- add `margin-top: 1em` to _all_ elements _after_ the first child of the container,
+- Use for spacing mixed elements (h1,h2,h3, p, etc.) inside a container
+
+The `flow-em` class will:
+
+- add `margin-block-start: 1em` (aka `margin-top`) to _all_ elements _after_ the first child of the container,
 - space the elements out proportionately, based on the font-size of the elements (which is why `em` rather than `rem` is used).
 
 ```CSS
@@ -193,18 +197,81 @@ The `flow` class will:
     margin: 0;
 }
 
-.flow > * + * {
-    margin-top: 1em;
+.flow-em > * + * {
+    margin-block-start: 1em;
     /* em NOT rem & margin-top NOT margin bottom */
 }
 ```
 
 ```HTML
-<article class="flow">
+<article class="flow-em">
     <h2>Main Heading</h2><!-- NO margin-top -->
     <p>Some text.</p><!-- HAS margin-top -->
     <p>Some text.</p><!-- HAS margin-top -->
     <p>Some text.</p><!-- HAS margin-top -->
+    <!-- etc -->
+</article>
+
+```
+
+You can make `flow-em` more flexible by adding a custom variable:
+
+```CSS
+.flow-em > * + * {
+    margin-block-start: var(--flow-space, 1em);
+}
+```
+
+Then you could change the `margin-block-start` value with an inline style:
+
+```HTML
+<article class="flow-em" style="--flow-space: 1.5em;">
+    <h2>Main Heading</h2>
+    <p>Some text.</p>
+    <p>Some text.</p>
+    <p>Some text.</p>
+    <!-- etc -->
+</article>
+
+```
+
+### `flow-rem`
+
+Almost identical to `flow-em`, but this time using `rem` units.
+
+Use for spacing child containers:
+
+```CSS
+.flow-rem > * + * {
+    margin-block-start: 1rem;
+}
+```
+
+```HTML
+<article class="flow-rem">
+    <div>...</div>
+    <div>...</div>
+    <div>...</div>
+    <div>...</div>
+    <!-- etc -->
+</article>
+
+```
+
+Or:
+
+```CSS
+.flow-rem > * + * {
+    margin-block-start: var(--flow-space, 1rem);
+}
+```
+
+```HTML
+<article class="flow-rem" style="--flow-space:1.5rem">
+    <div>...</div>
+    <div>...</div>
+    <div>...</div>
+    <div>...</div>
     <!-- etc -->
 </article>
 
