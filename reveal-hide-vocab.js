@@ -7,11 +7,11 @@ export default function revealHideVocab() {
     const revealBtnTxt = document.getElementById("reveal-btn-txt")
     revealBtnTxt.textContent =
       revealBtnTxt.textContent === "Reveal" ? "Hide" : "Reveal"
-    styleWord(wordsObscured, "display:inline", "display:none")
-    styleWord(wordsFull, "display:none", "display:inline")
+    styleWords(wordsObscured, "display:inline", "display:none")
+    styleWords(wordsFull, "display:none", "display:inline")
   })
 
-  function styleWord(el, styleVal_1, styleVal_2) {
+  function styleWords(el, styleVal_1, styleVal_2) {
     el.forEach((word) => {
       let styleAttr = word.getAttribute("style")
       styleAttr =
