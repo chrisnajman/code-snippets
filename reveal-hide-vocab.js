@@ -11,13 +11,13 @@ export default function revealHideVocab() {
     styleWord(wordsFull, "display:none", "display:inline")
   })
 
-  function styleWord(el, val_1, val_2) {
+  function styleWord(el, styleVal_1, styleVal_2) {
     el.forEach((word) => {
       let styleAttr = word.getAttribute("style")
       styleAttr =
-        styleAttr === val_1
-          ? word.setAttribute("style", val_2)
-          : word.setAttribute("style", val_1)
+        styleAttr === styleVal_1
+          ? word.setAttribute("style", styleVal_2)
+          : word.setAttribute("style", styleVal_1)
     })
   }
 }
