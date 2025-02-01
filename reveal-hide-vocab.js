@@ -1,3 +1,5 @@
+import setAndToggleAttribute from "./set-and-toggle-attribute.js"
+
 export default function revealHideVocab() {
   const toggleRevealBtn = document.getElementById("toggle-reveal-btn")
   const wordsObscured = document.querySelectorAll(".word-obscured")
@@ -7,19 +9,16 @@ export default function revealHideVocab() {
     const revealBtnTxt = document.getElementById("reveal-btn-txt")
     revealBtnTxt.textContent =
       revealBtnTxt.textContent === "Reveal" ? "Hide" : "Reveal"
-    styleWords(wordsObscured, "display:inline", "display:none")
-    styleWords(wordsFull, "display:none", "display:inline")
-  })
 
-  function styleWords(el, styleVal_1, styleVal_2) {
-    el.forEach((word) => {
-      let styleAttr = word.getAttribute("style")
-      styleAttr =
-        styleAttr === styleVal_1
-          ? word.setAttribute("style", styleVal_2)
-          : word.setAttribute("style", styleVal_1)
-    })
-  }
+    setAndToggleAttribute(
+      wordsObscured,
+      "style",
+      "display:inline",
+      "display:none"
+    )
+
+    setAndToggleAttribute(wordsFull, "style", "display:none", "display:inline")
+  })
 }
 
 revealHideVocab()
