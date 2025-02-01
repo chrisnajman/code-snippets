@@ -2,8 +2,8 @@ import setAndToggleAttribute from "./set-and-toggle-attribute.js"
 
 export default function revealHideVocab() {
   const toggleRevealBtn = document.getElementById("toggle-reveal-btn")
-  const wordsObscured = document.querySelectorAll(".word-obscured")
-  const wordsFull = document.querySelectorAll(".word-full")
+  const wordsObscured = document.querySelectorAll("[data-word-obscured]")
+  const wordsFull = document.querySelectorAll("[data-word-full]")
 
   toggleRevealBtn.addEventListener("click", () => {
     const revealBtnTxt = document.getElementById("reveal-btn-txt")
