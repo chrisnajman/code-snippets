@@ -2572,6 +2572,8 @@ This command tells Git to:
 
 ### Delete the entire project folder
 
+After deleting the folder, run:
+
 ```
 cd my-projects
 git clone https://github.com/your-username/my-git-repo.git name-of-project
