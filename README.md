@@ -55,6 +55,9 @@
 
 ---
 
+- [Git new branch: create, merge, delete, push](#git-new-branch-create-merge-delete-push)
+- [Deleting Git](#deleting-git)
+- [Resolving Git Conflicts](#resolving-git-conflicts)
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 - [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
 
@@ -2490,6 +2493,134 @@ export default App
     - Finally, check that the corresponding Git Page is displaying correctly.
 
 [Back to top](#code-snippets)
+
+---
+
+## Git new branch: create, merge, delete, push
+
+Say I've got both a git repository (called my-git-repo) on Github, and a local copy synched with the remote version.
+
+- I will be working on the local repository.
+- I need to do some experimental work on the index.html file (the only file in the repository).
+
+Therefore, I want to:
+
+1. Switch to a new branch (called 'experiment')
+2. Make changes on index.html in branch 'experiment' until I am satisfied with it.
+3. Merge 'experiment' branch with main branch.
+4. Delete 'experiment' branch.
+5. Push main branch to 'my-git-repo' on GitHub.
+
+---
+
+### How to achieve steps 1-5.
+
+#### 1. Create and switch to 'experiment' branch
+
+```
+git checkout -b experiment
+```
+
+#### 2. Make changes to index.html, then stage and commit them
+
+```
+git add index.html
+git commit -m "Experimental changes to index.html"
+```
+
+#### 3. Switch back to main and merge 'experiment' into it
+
+```
+git checkout main
+git merge experiment
+
+```
+
+#### 4. Delete the 'experiment' branch
+
+```
+git branch -d experiment
+```
+
+#### 5. Push main branch to GitHub
+
+```
+git push
+```
+
+---
+
+## Deleting Git
+
+### Delete everything except the `.git` folder
+
+If you delete everything except the .git folder, you're still inside a Git repository — just with the working directory empty.
+
+You can then restore everything by doing:
+
+```
+git reset --hard origin/main
+```
+
+This command tells Git to:
+
+- Reset the local branch (main) to match the remote (origin/main)
+
+- Overwrite the working directory to reflect that (bringing back index.html)
+
+---
+
+### Delete the entire project folder
+
+```
+cd my-projects
+git clone https://github.com/your-username/my-git-repo.git name-of-project
+
+```
+
+You'll get a fresh local copy of the entire repository as it exists on GitHub - including all branches (though you'll be on the default branch, usually main, by default).
+
+---
+
+## Resolving Git Conflicts
+
+I get the following conflict:
+
+```
+<<<<<< HEAD
+<h1>Main version</h1>
+=======
+<h1>Experimental version</h1>
+>>>>>> experiment
+
+```
+
+I want `<h1>Experimental version</h1>` to be the result of resolving the conflict.
+
+Change this:
+
+```
+<<<<<< HEAD
+<h1>Main version</h1>
+=======
+<h1>Experimental version</h1>
+>>>>>> experiment
+
+```
+
+To this:
+
+```
+<h1>Experimental version</h1>
+```
+
+Then stage and commit the resolved file in which it sits (e.g. index.html):
+
+```
+git add index.html
+git commit
+
+```
 
 ---
 
