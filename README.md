@@ -534,8 +534,7 @@ The best candidates for its application are:
 button {
   all: unset; /* strips button of all default property values */
   text-box: trim-both cap alphabetic;
-  padding-block-start: 0.5em;
-  padding-block-end: 0.5em;
+  padding-block: 0.5em;
 
   /* Other styles */
   padding-inline: 1em;
@@ -545,26 +544,31 @@ button {
 
 ```
 
-### Supported Browsers
+#### Supported Browsers
 
 The CSS above will successfully trim virtual space from above and below the button text. The `padding-block: 0.5em` will ensure that the text is evenly vertically spaced.
 
-### Unsupported Browsers
+#### Unsupported Browsers
 
 The button will appear unnaturally large (tall), due to the vertical padding plus the virtual space. In order to counteract this, the following CSS might be used:
 
 ```CSS
 @supports not (text-box: trim-both cap alphabetic) {
   button {
-    padding-block-end: 0.4em; /* This value will depend on which font is used */
+    padding-block: 0.25em 0.4em; /* These values will depend on which font is used */
   }
 }
 
 ```
 
+![Buttons with and without text-box: trim-both...](./img/text-box-trim/buttons.png)
+
 ## Conclusion
 
 - Lining up an image with text is the use-case with no fallbacks or magic numbers required: If the browser doesn't support the rule, you get what you've always got before.
+
+![TImage and text with and without text-box: trim-both...](./img/text-box-trim/image-text.png)
+
 - The problem with buttons has already been set out.
 - Using it on all text blocks robs the page of the pleasing text rhythm supplied by the browser _and_ requires fallbacks for non-supported browsers.
 
