@@ -10,6 +10,7 @@
 - [Centre absolutely positioned ::after element](#centre-absolutely-positioned-after-element)
 - [Pixels to Rems](#pixels-to-rems)
 - [Nested Grid Unusual Behaviour Fixed by `min-width:0`](#nested-grid-unusual-behaviour-fixed-by-min-width0)
+- [CSS text-box: trim-both cap alphabetic](#css-text-box-trim-both-cap-alphabetic)
 
 ---
 
@@ -512,6 +513,60 @@ main {
 > Both HTML pages had the usual `<meta name="viewport" content="width=device-width, initial-scale=1.0">` tag in the `head` section.
 
 [Back to top](#code-snippets)
+
+---
+
+## CSS `text-box: trim-both cap alphabetic`
+
+This trims the 'virtual space' above and below text. It's currently (20/05/2025) not widely supported.
+
+It can be used to trim text over a whole page, but this is overkill.
+
+The best candidates for its application are:
+
+- Lining up the top edge of text with an accompanying image.
+- Evening-up the space above and below button text (although this can cause complications in non-supporting browsers, see below).
+
+### Button Complications
+
+```CSS
+
+button {
+  all: unset; /* strips button of all default property values */
+  text-box: trim-both cap alphabetic;
+  padding-block-start: 0.5em;
+  padding-block-end: 0.5em;
+
+  /* Other styles */
+  padding-inline: 1em;
+  width: fit-content;
+  line-height: 1;
+ }
+
+```
+
+### Supported Browsers
+
+The CSS above will successfully trim virtual space from above and below the button text. The `padding-block: 0.5em` will ensure that the text is evenly vertically spaced.
+
+### Unsupported Browsers
+
+The button will appear unnaturally large (tall), due to the vertical padding plus the virtual space. In order to counteract this, the following CSS might be used:
+
+```CSS
+@supports not (text-box: trim-both cap alphabetic) {
+  button {
+    padding-block-end: 0.4em; /* This value will depend on which font is used */
+  }
+}
+
+```
+
+## Conclusion
+
+- Lining up an image with text is the use-case with no fallbacks or magic numbers required: If the browser doesn't support the rule, you get what you've always got before.
+- The problem with buttons has already been set out.
+- Using it on all text blocks robs the page of the pleasing text rhythm supplied by the browser _and_ requires fallbacks for non-supported browsers.
 
 ---
 
