@@ -550,7 +550,7 @@ The CSS above will successfully trim virtual space from above and below the butt
 
 #### Unsupported Browsers
 
-The button will appear unnaturally large (tall), due to the vertical padding plus the virtual space. In order to counteract this, the following CSS might be used:
+The button will be larger (taller), due to the vertical padding plus the virtual space. In order to counteract this, the following CSS might be used:
 
 ```CSS
 @supports not (text-box: trim-both cap alphabetic) {
