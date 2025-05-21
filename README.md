@@ -60,6 +60,7 @@
 - [Deleting Git](#deleting-git)
 - [Resolving Git Conflicts](#resolving-git-conflicts)
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
+- [GitHub Markdown: Add image to README.md](#github-markdown-add-image-to-readmemd)
 - [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
 
 ---
@@ -2527,6 +2528,12 @@ export default App
 > Negative potential consequences of an action.
 
 [Back to top](#code-snippets)
+
+---
+
+## GitHub Markdown: Add image to README.md
+
+`![Image alt text](./[path-to-image]/[image-name].[image-file-type])`
 
 ---
 
