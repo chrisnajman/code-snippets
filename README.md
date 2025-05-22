@@ -20,7 +20,7 @@
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [`Math.ceil(Math.random() * n)`: Explanation](#mathceilmathrandom--n-explanation)
 - [String Manipulation](#string-manipulation)
-- [Multiple Button Instances that act Independently](#multiple-button-instances-that-act-independently)
+- [Multiple Button Instances that Act Independently](#multiple-button-instances-that-act-independently)
 
 ---
 
@@ -913,7 +913,7 @@ console.log(finalString);
 
 ---
 
-## Multiple Button Instances that act Independently
+## Multiple Button Instances that Act Independently
 
 ![Buttons with independent outputs](./img/button-closest/buttons-outputs.png)
 
