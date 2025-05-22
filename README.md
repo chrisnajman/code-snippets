@@ -20,6 +20,7 @@
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [`Math.ceil(Math.random() * n)`: Explanation](#mathceilmathrandom--n-explanation)
 - [String Manipulation](#string-manipulation)
+- [Multiple Button Instances that act Independently](#multiple-button-instances-that-act-independently)
 
 ---
 
@@ -909,6 +910,43 @@ console.log(finalString);
 **Output**: "Sample Sentence with a Few Words"
 
 [Back to top](#code-snippets)
+
+---
+
+## Multiple Button Instances that act Independently
+
+![Buttons with independent outputs](./img/button-closest/buttons-outputs.png)
+
+```HTML
+<section data-section>
+    <button data-button>Button 1</button>
+    <p data-output></p>
+</section>
+<section data-section>
+    <button data-button>Button 2</button>
+    <p data-output></p>
+</section>
+<section data-section>
+    <button data-button>Button 3</button>
+    <p data-output></p>
+</section>
+
+```
+
+```JavaScript
+const buttons = document.querySelectorAll("[data-button")
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const section = btn.closest("[data-section]") /* Get parent container */
+        const output = section.querySelector("[data-output]") /* Target child element */
+        const buttonText = e.target.textContent
+
+        output.textContent = `${buttonText} output`
+    })
+})
+
+```
 
 ---
 
