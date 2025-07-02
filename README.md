@@ -63,7 +63,7 @@
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 - [GitHub Markdown: Add image to README.md](#github-markdown-add-image-to-readmemd)
 - [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
-- [Git Pages: create from `/docs` after bundling JS and minifying CSS]()
+- [GitHub Pages: publish from `/docs` after bundling JS and minifying CSS](#github-pages-publish-from-docs-after-bundling-js-and-minifying-css)
 
 ---
 
