@@ -63,6 +63,7 @@
 - [GitHub Markdown: Notes and Warnings](#github-markdown-notes-and-warnings)
 - [GitHub Markdown: Add image to README.md](#github-markdown-add-image-to-readmemd)
 - [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
+- [Git Pages: create from `/docs` after bundling JS and minifying CSS]()
 
 ---
 
@@ -2727,6 +2728,116 @@ git add index.html
 git commit
 
 ```
+
+[Back to top](#code-snippets)
+
+---
+
+## GitHub Pages: publish from `/docs` after bundling JS and minifying CSS
+
+Instead of publishing from the project root, use the `/docs` folder as the GitHub Pages source.
+
+This allows the site to be built using **minified, transpiled JavaScript** and **minified, flattened nested CSS**, while keeping the unprocessed source files in the root.
+
+---
+
+### Processing JavaScript
+
+- Install esbuild:
+
+  ```bash
+  npm install --save-dev esbuild
+  ```
+
+- Then run:
+  ```bash
+  npx esbuild index.js --bundle --minify --target=es2015 --outfile=docs/bundle.js
+  ```
+
+---
+
+### Processing CSS (with nesting support)
+
+- Install PostCSS and plugins:
+
+  ```bash
+  npm install --save-dev postcss postcss-nesting postcss-cli cssnano
+  ```
+
+- Create a `postcss.config.js` file in the project root:
+
+  ```js
+  module.exports = {
+    plugins: [
+      require("postcss-nesting"),
+      require("cssnano")({ preset: "default" }),
+    ],
+  }
+  ```
+
+- Then run:
+  ```bash
+  npx postcss style.css --output docs/style.min.css
+  ```
+
+---
+
+### 📁 Copy all site files to `/docs`
+
+In all HTML files:
+
+- Update the script tag:
+
+  ```html
+  <!-- Before -->
+  <script
+    type="module"
+    src="./index.js"
+  ></script>
+
+  <!-- After -->
+  <script
+    src="./bundle.js"
+    defer
+  ></script>
+  ```
+
+- Update the CSS link:
+
+  ```html
+  <!-- Before -->
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  />
+
+  <!-- After -->
+  <link
+    rel="stylesheet"
+    href="./style.min.css"
+  />
+  ```
+
+> [!WARNING] > **Do not copy** `README.md`, `LICENSE`, `.gitignore`, or any build/dev files into `/docs`.
+
+---
+
+### Publishing `/docs` on GitHub Pages
+
+1. Go to:
+
+   ```
+   https://github.com/[yourname]/colour-contrast-checker/settings/pages
+   ```
+
+2. Under **Build and deployment > Source**, select:
+
+   - **Branch**: `main` (or your default branch)
+   - **Folder**: `/docs`
+
+3. Save and wait for the site to deploy.
+
+[Back to top](#code-snippets)
 
 ---
 
