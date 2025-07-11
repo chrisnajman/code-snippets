@@ -982,7 +982,7 @@ removeFromDomBtn.addEventListener("click", () => {
 
 ```HTML
 <div id="created-element-container"></div>
-<button id="remove-from-dom-btn" type="button">Remove created element from Dom</button>
+<button id="remove-from-dom-btn" type="button">Remove dynamically-created element from Dom</button>
 
 ```
 
