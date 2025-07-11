@@ -20,7 +20,8 @@
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
 - [`Math.ceil(Math.random() * n)`: Explanation](#mathceilmathrandom--n-explanation)
 - [String Manipulation](#string-manipulation)
-- [## Multiple button instances that act independently of each other](#multiple-button-instances-that-act-independently-of-each-other)
+- [Multiple button instances that act independently of each other](#multiple-button-instances-that-act-independently-of-each-other)
+- [Check if element is in DOM with `.isConnected` then `.remove()` element](#check-if-element-is-in-dom-with-isconnected-then-remove-element)
 
 ---
 
@@ -948,6 +949,61 @@ buttons.forEach(btn => {
 })
 
 ```
+
+[Back to top](#code-snippets)
+
+---
+
+## Check if element is in DOM with `.isConnected` then `.remove()` element
+
+`.isConnected` is a read-only boolean property of a DOM node that tells you whether the node is currently attached to the document (i.e. part of the live DOM).
+
+### Static element
+
+```HTML
+<p id="content">Content</p>
+<button id="remove-from-dom-btn" type="button">Remove static element from Dom</button>
+
+```
+
+```JavaScript
+const removeFromDomBtn = document.getElementById("remove-from-dom-btn")
+const content = document.getElementById("content")
+
+removeFromDomBtn.addEventListener("click", () => {
+    if (content.isConnected) {
+        content.remove()
+    }
+})
+
+```
+
+### Dynamically-created element
+
+```HTML
+<div id="created-element-container"></div>
+<button id="remove-from-dom-btn" type="button">Remove created element from Dom</button>
+
+```
+
+```JavaScript
+const removeFromDomBtn = document.getElementById("remove-from-dom-btn")
+const createdElementContainer = document.getElementById("created-element-container")
+
+const createdElement = document.createElement("p")
+createdElement.textContent = "Created element"
+
+createdElementContainer.appendChild(createdElement)
+
+removeFromDomBtn.addEventListener("click", () => {
+    if (createdElement.isConnected) {
+        createdElement.remove()
+    }
+})
+
+```
+
+[Back to top](#code-snippets)
 
 ---
 
