@@ -23,6 +23,7 @@
 - [Multiple button instances that act independently of each other](#multiple-button-instances-that-act-independently-of-each-other)
 - [Check if element is in DOM with `.isConnected` then `.remove()` element](#check-if-element-is-in-dom-with-isconnected-then-remove-element)
 - [Use `.some()`array method to check if at least one element matches a condition](#use-somearray-method-to-check-if-at-least-one-element-matches-a-condition)
+- [`loading="lazy"` for all images, except the first]()
 
 ---
 
@@ -1042,6 +1043,32 @@ const checkboxes = [
 
 console.log(checkboxes.some(box => box.checked)) // false, because no checkboxes are checked
 
+
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## `loading="lazy"` for all images, except the first
+
+```JavaScript
+
+const images = document.querySelectorAll("img")
+let imageCount = 0
+
+function lazyLoadImages(image) {
+    if (imageCount > 0) {
+        image.loading = "lazy"
+    }
+
+    imageCount++;
+
+}
+
+images.forEach(image => {
+    lazyLoadImages(image)
+})
 
 ```
 
