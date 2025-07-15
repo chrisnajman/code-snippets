@@ -22,6 +22,7 @@
 - [String Manipulation](#string-manipulation)
 - [Multiple button instances that act independently of each other](#multiple-button-instances-that-act-independently-of-each-other)
 - [Check if element is in DOM with `.isConnected` then `.remove()` element](#check-if-element-is-in-dom-with-isconnected-then-remove-element)
+- [Use `.some()`array method to check if at least one element matches a condition](#use-somearray-method-to-check-if-at-least-one-element-matches-a-condition)
 
 ---
 
@@ -1000,6 +1001,47 @@ removeFromDomBtn.addEventListener("click", () => {
         createdElement.remove()
     }
 })
+
+```
+
+[Back to top](#code-snippets)
+
+---
+
+### Use `.some()`array method to check if at least one element matches a condition
+
+```JavaScript
+const checkboxes = [
+  { checked: false },
+  { checked: false },
+  { checked: true },
+]
+
+const anyChecked = checkboxes.some(box => box.checked)
+console.log(anyChecked) // true, because one checkbox is checked
+
+```
+
+```JavaScript
+const checkboxes = [
+  { checked: false },
+  { checked: true },
+  { checked: true },
+]
+
+const anyChecked = checkboxes.some(box => box.checked)
+console.log(anyChecked) // true, because at least one checkbox is checked
+
+```
+
+```JavaScript
+const checkboxes = [
+  { checked: false },
+  { checked: false },
+]
+
+console.log(checkboxes.some(box => box.checked)) // false, because no checkboxes are checked
+
 
 ```
 
