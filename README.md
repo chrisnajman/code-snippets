@@ -10,7 +10,8 @@
 - [Centre absolutely positioned ::after element](#centre-absolutely-positioned-after-element)
 - [Pixels to Rems](#pixels-to-rems)
 - [Nested Grid Unusual Behaviour Fixed by `min-width:0`](#nested-grid-unusual-behaviour-fixed-by-min-width0)
-- [CSS text-box: trim-both cap alphabetic](#css-text-box-trim-both-cap-alphabetic)
+- [CSS `text-box: trim-both cap alphabetic`](#css-text-box-trim-both-cap-alphabetic)
+- [The modern way to clear floats: `display: flow-root`](#the-modern-way-to-clear-floats-display-flow-root)
 
 ---
 
@@ -573,10 +574,40 @@ The button will be larger (taller), due to the vertical padding plus the virtual
 
 - Lining up an image with text is the use-case with no fallbacks or magic numbers required: If the browser doesn't support the rule, you get what you've always got before.
 
-![TImage and text with and without text-box: trim-both...](./img/text-box-trim/image-text.png)
+![Image and text with and without text-box: trim-both...](./img/text-box-trim/image-text.png)
 
 - The problem with buttons has already been set out.
 - Using it on all text blocks robs the page of the pleasing text rhythm supplied by the browser _and_ requires fallbacks for non-supported browsers.
+
+[Back to top](#code-snippets)
+
+---
+
+## The modern way to clear floats: `display: flow-root`
+
+```css
+.container {
+  /* Self-clear floated children */
+  display: flow-root;
+}
+
+.floated-item {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+```
+
+```html
+<div class="container">
+  <div class="floated-item"></div>
+  <div class="floated-item"></div>
+</div>
+```
+
+Without `display: flow-root;` on `.container`, its height would collapse to zero.
+
+[Back to top](#code-snippets)
 
 ---
 
