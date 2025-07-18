@@ -12,6 +12,7 @@
 - [Nested Grid Unusual Behaviour Fixed by `min-width:0`](#nested-grid-unusual-behaviour-fixed-by-min-width0)
 - [CSS `text-box: trim-both cap alphabetic`](#css-text-box-trim-both-cap-alphabetic)
 - [The modern way to clear floats: `display: flow-root`](#the-modern-way-to-clear-floats-display-flow-root)
+- [CSS `box-shadow` applied to only one side](#css-box-shadow-applied-to-only-one-side)
 
 ---
 
@@ -606,6 +607,94 @@ The button will be larger (taller), due to the vertical padding plus the virtual
 ```
 
 Without `display: flow-root;` on `.container`, its height would collapse to zero.
+
+[Back to top](#code-snippets)
+
+---
+
+## CSS `box-shadow` applied to only one side
+
+### Quick Reference
+
+| Direction | `box-shadow` Value              |
+| --------- | ------------------------------- |
+| Bottom    | `0 4px 6px rgba(0, 0, 0, 0.2)`  |
+| Top       | `0 -4px 6px rgba(0, 0, 0, 0.2)` |
+| Right     | `4px 0 6px rgba(0, 0, 0, 0.2)`  |
+| Left      | `-4px 0 6px rgba(0, 0, 0, 0.2)` |
+
+---
+
+### Syntax
+
+```css
+box-shadow: offset-x offset-y blur-radius spread-radius color;
+```
+
+- `offset-x`: horizontal offset (positive = right, negative = left)
+- `offset-y`: vertical offset (positive = bottom, negative = top)
+- `blur-radius`: how soft/diffuse the shadow is
+- `spread-radius`: (optional) expands or contracts the shadow
+- `color`: shadow color (use `rgba()` for transparency)
+
+---
+
+### One-Sided Shadow Examples
+
+##### Bottom-only shadow
+
+```css
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+```
+
+##### Top-only shadow
+
+```css
+box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+```
+
+##### Right-only shadow
+
+```css
+box-shadow: 4px 0 6px rgba(0, 0, 0, 0.2);
+```
+
+##### Left-only shadow
+
+```css
+box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+```
+
+---
+
+### Understanding the "length" of the shadow
+
+The **6px** in the examples is the **blur radius**, not the literal length of the shadow in one direction.
+
+- A **larger blur-radius** (e.g., `12px`) creates a softer, more spread-out shadow
+- A **blur-radius of 0** creates a sharp edge
+
+##### Crisp shadows:
+
+```css
+box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3); /* Sharp bottom shadow */
+```
+
+##### Soft shadows:
+
+```css
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft, long shadow */
+```
+
+---
+
+### `spread-radius`
+
+Use `spread-radius` (4th value) to expand or shrink the shadow size:
+
+```css
+box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.2); /* 2px extra spread */
+```
 
 [Back to top](#code-snippets)
 
