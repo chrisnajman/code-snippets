@@ -2,6 +2,15 @@
 
 ---
 
+## HTML
+
+- [Correct use of the HTML `section` tag.](#correct-use-of-the-html-section-tag)
+
+---
+
+## CSS
+
+- [Target external links with `a[href^="https"]`](#target-external-links-with-ahrefhttps)
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
 - [@media (hover: hover)](#media-hover-hover)
@@ -16,6 +25,8 @@
 
 ---
 
+## JavaScript
+
 - [Set Multiple Attributes](#set-multiple-attributes)
 - [Global Event Listener](#global-event-listener)
 - [If, if/else statement vs Conditional (ternary) operator](#if-ifelse-statement-vs-conditional-ternary-operator)
@@ -27,7 +38,15 @@
 - [Use `.some()`array method to check if at least one element matches a condition](#use-somearray-method-to-check-if-at-least-one-element-matches-a-condition)
 - [`loading="lazy"` for all images, except the first]()
 
+### Local Storage
+
+- [Clear local storage](#clear-local-storage)
+- [Delete Local Storage Keys](#delete-local-storage-keys)
+- [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
+
 ---
+
+## Accessibility
 
 - [Accessible details/summary 'accordion'](#accessible-detailssummary-accordion)
 - [Accessible details/summary 'accordion' group](#accessible-detailssummary-accordion-group)
@@ -36,11 +55,7 @@
 
 ---
 
-- [Clear local storage](#clear-local-storage)
-- [Delete Local Storage Keys](#delete-local-storage-keys)
-- [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
-
----
+## React
 
 - [React Proptypes for Image Src](#react-proptypes-for-image-src)
 - [React Proptypes and Default Proptypes for an Array of Objects](#react-proptypes-and-default-proptypes-for-an-array-of-objects)
@@ -62,6 +77,8 @@
 
 ---
 
+## Git
+
 - [Git new branch: create, merge, delete, push](#git-new-branch-create-merge-delete-push)
 - [Deleting Git](#deleting-git)
 - [Resolving Git Conflicts](#resolving-git-conflicts)
@@ -69,6 +86,48 @@
 - [GitHub Markdown: Add image to README.md](#github-markdown-add-image-to-readmemd)
 - [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
 - [GitHub Pages: publish from `/docs` after bundling JS and minifying CSS](#github-pages-publish-from-docs-after-bundling-js-and-minifying-css)
+
+---
+
+## Command Line
+
+- [Get IPv4 Address](#get-ipv4-address)
+- [Clear DNS cache](#clear-dns-cache)
+
+---
+
+## Correct use of the HTML `section` tag.
+
+Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Section Title</h2>` the `section` element has **no semantic significance** and might as well be a `div`.
+
+(The `aria-labelledby` attribute identifies the element (or elements) that labels the element it is applied to.)
+
+```html
+<section aria-labelledby="section-title">
+  <h2 id="section-title">Section Title</h2>
+  <p>Lorem ipsum...</p>
+</section>
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Target external links with `a[href^="https"]`
+
+```css
+a[href^="https"] {
+  color: var(--accent-colour);
+  text-underline-offset: 0.5em;
+
+  &::after {
+    color: var(--accent-colour);
+    content: " \27F6";
+  }
+}
+```
+
+[Back to top](#code-snippets)
 
 ---
 
@@ -3097,3 +3156,25 @@ All snippets tested on Windows 10 with:
 Each snippet tested in both browser and device views.
 
 [Back to top](#code-snippets)
+
+---
+
+## Get IPv4 Address
+
+```bash
+ipconfig | findstr /C:Address
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Clear DNS cache
+
+```bash
+ipconfig /flushdns
+```
+
+[Back to top](#code-snippets)
+
+---
