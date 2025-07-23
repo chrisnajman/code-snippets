@@ -96,6 +96,10 @@
 
 ---
 
+---
+
+---
+
 ## Correct use of the HTML `section` tag.
 
 Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Section Title</h2>` the `section` element has **no semantic significance** and might as well be a `div`.
