@@ -37,7 +37,8 @@
 - [Multiple button instances that act independently of each other](#multiple-button-instances-that-act-independently-of-each-other)
 - [Check if element is in DOM with `.isConnected` then `.remove()` element](#check-if-element-is-in-dom-with-isconnected-then-remove-element)
 - [Use `.some()`array method to check if at least one element matches a condition](#use-somearray-method-to-check-if-at-least-one-element-matches-a-condition)
-- [`loading="lazy"` for all images, except the first]()
+- [`loading="lazy"` for all images, except the first](#loadinglazy-for-all-images-except-the-first)
+- [Workaround for Read-Only Imports in ES Modules: Getter/Setter Pattern](#workaround-for-read-only-imports-in-es-modules-gettersetter-pattern)
 
 ### Local Storage
 
@@ -1284,6 +1285,63 @@ images.forEach(image => {
     lazyLoadImages(image)
 })
 
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Workaround for Read-Only Imports in ES Modules: Getter/Setter Pattern
+
+### Problem
+
+The following will throw a console error:
+
+`globals.js`:
+
+```javascript
+export let myVar
+```
+
+`index.js`:
+
+```javascript
+import { myVar } from "./globals.js"
+
+myVar = 10
+console.log("myVar: Assignment to constant variable")
+```
+
+This is because:
+
+- Named imports are **read-only bindings**, even if the original was declared with `let` or `var`.
+- You can **read** their value, but cannot **assign** to them in the importing module.
+
+### Solution
+
+To modify a shared value you can use _setter/getter_ functions:
+
+`globals.js`:
+
+```javascript
+let myVar
+
+export function setMyVar(val) {
+  myVar = val
+}
+
+export function getMyVar() {
+  return myVar
+}
+```
+
+`index.js`:
+
+```javascript
+import { setMyVar, getMyVar } from "./globals.js"
+
+setMyVar(10)
+console.log(getMyVar()) // 10
 ```
 
 [Back to top](#code-snippets)
