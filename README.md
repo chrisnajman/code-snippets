@@ -22,6 +22,7 @@
 - [CSS `text-box: trim-both cap alphabetic`](#css-text-box-trim-both-cap-alphabetic)
 - [The modern way to clear floats: `display: flow-root`](#the-modern-way-to-clear-floats-display-flow-root)
 - [CSS `box-shadow` applied to only one side](#css-box-shadow-applied-to-only-one-side)
+- [Invert image (darkmode / lightmode)](#invert-image-darkmode--lightmode)
 
 ---
 
@@ -757,6 +758,36 @@ Use `spread-radius` (4th value) to expand or shrink the shadow size:
 
 ```css
 box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.2); /* 2px extra spread */
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Invert image (darkmode / lightmode)
+
+```html
+<img
+  class="image-invert"
+  src="..."
+  alt=""
+  width=""
+/>
+```
+
+```css
+:root {
+  /* light mode (default) */
+  --image-invert: 0;
+}
+
+.darkmode {
+  --image-invert: 1;
+}
+
+.image-invert {
+  filter: invert(var(--image-invert));
+}
 ```
 
 [Back to top](#code-snippets)
