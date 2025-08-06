@@ -98,6 +98,10 @@
 
 ---
 
+## Windows 10
+
+- [Create New User Profile](#create-new-user-profile)
+
 ---
 
 ---
@@ -3267,6 +3271,84 @@ ipconfig | findstr /C:Address
 ```bash
 ipconfig /flushdns
 ```
+
+[Back to top](#code-snippets)
+
+---
+
+## Create New User Profile
+
+1. `Windows + I` > Settings > 2. Accounts > Family & other users.
+2. Click 'Add someone else to this PC'.
+3. Choose:
+
+- 'I don't have this person's sign-in information'.
+- Then 'Add a user without a Microsoft Account'.
+
+4. Name it something like 'TestUser' and leave the password field blank.
+5. Log out of the current user ('YourName'): `Ctrl + Alt + Delete` > Sign out.
+
+You will now be on the login screen. To log in to 'TestUser':
+
+- Click the 'TestUser' icon.
+
+> [!NOTE]
+> The laptop virtual keyboard might obscure the user icons. Press e.g. `Esc` and the keyboard should disappear.
+
+## Once Logged-in to 'TestUser' Profile
+
+Various setup processes will take place. Say no to the Microsoft options that want you to submit data to it, etc.
+Once setup is over, do the tests.
+
+## Log back in to 'YourName' User Profile
+
+There are 2 ways of doing this:
+
+### Option 1: Sign out
+
+- `Ctrl + Alt + Delete` > Sign out.
+
+You will now be on the login screen. To log in to 'YourName':
+
+- Click the 'YourName' icon.
+
+> [!NOTE]
+> The laptop virtual keyboard might obscure the user icons. Press e.g. `Esc` and the keyboard should disappear.
+
+The **_downside_** of signing out is that Gmail, Instagram, Amazon, etc. will all be signed-out.
+
+The **_upside_** is that it is very easy to now delete the 'TestUser' account.
+
+### Option 2: Switch user
+
+- `Ctrl + Alt + Delete` > Switch user.
+
+You will now be on the login screen. To log in to 'YourName':
+
+- Click the 'YourName' icon.
+
+> [!NOTE]
+> The laptop virtual keyboard might obscure the user icons. Press e.g. `Esc` and the keyboard should disappear.
+
+The **_upside_** of switching users is that Gmail, Instagram, Amazon, etc. will all still be signed-in.
+
+The **_downside_** is that it is not as easy to delete the 'TestUser' account.
+
+## Deleting the `TestUser` Profile
+
+If you returned to your main user profile 'YourName' via:
+
+- **Sign out**:
+
+  1. `Windows + I` > Settings > 2. Accounts > Family & other users.
+  2. Click on the 'TestUser' icon.
+  3. Click 'Remove'.
+
+- **Switch user**:
+  1. Restart your PC and power on again.
+  2. `Windows + I` > Settings > 2. Accounts > Family & other users.
+  3. Click on the 'TestUser' icon.
+  4. Click 'Remove'.
 
 [Back to top](#code-snippets)
 
