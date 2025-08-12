@@ -3370,7 +3370,7 @@ If you returned to your main user profile 'YourName' via:
 
 **Step 2 — Run the combined repair command**
 
-```bash
+```
 DISM.exe /Online /Cleanup-Image /RestoreHealth && sfc /scannow
 ```
 
@@ -3411,7 +3411,7 @@ Ensure you are connected to the internet and try again.
 3. Note the drive letter (e.g., `E:`).
 4. Run:
 
-```bash
+```
 DISM.exe /Online /Cleanup-Image /RestoreHealth /Source:E:\sources\install.wim /LimitAccess
 ```
 
@@ -3419,13 +3419,13 @@ Replace `E:` with your ISO’s drive letter.
 
 **Tip:** If `install.wim` is not present but `install.esd` is, the command changes to:
 
-```bash
+```
 DISM.exe /Online /Cleanup-Image /RestoreHealth /Source:esd:E:\sources\install.esd:1 /LimitAccess
 ```
 
 5. After DISM completes successfully, run:
 
-```bash
+```
 sfc /scannow
 ```
 
