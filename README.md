@@ -3360,7 +3360,7 @@ If you returned to your main user profile 'YourName' via:
 
 ## ChatGPT (Free Version): Tips for Prompt Structure & Reminders to Keep it On Track
 
-When working on multi-step or ongoing projects with ChatGPT, clear and consistent communication helps ChatGPT deliver the best results while minimizing mistakes or "hallucinations." Some tips to keep tips on track:
+When working on multi-step or ongoing projects with ChatGPT, clear and consistent communication helps it deliver the best results while minimizing mistakes or "hallucinations." Some tips to keep tips on track:
 
 ## 1. Provide Clear Context
 
@@ -3405,7 +3405,7 @@ This helps avoid carrying forward mistakes.
 
 ## 7. How to Identify Specific Messages in This Chat
 
-Because the chat interface does not show message numbers or timestamps, the best way to reference a previous message is by:
+Because the ChatGPT interface does not show message numbers or timestamps, the best way to reference a previous message is by:
 
 - Quoting a unique phrase or code snippet from that message.
 - Describing the content clearly, for example:
