@@ -104,6 +104,10 @@
 
 ---
 
+## AI
+
+- [ChatGPT (Free Version): Tips for Prompt Structure & Reminders to Keep it On Track](#chatgpt-free-version-tips-for-prompt-structure--reminders-to-keep-it-on-track)
+
 ---
 
 ## Correct use of the HTML `section` tag.
@@ -595,7 +599,7 @@ main {
 
 ## CSS `text-box: trim-both cap alphabetic`
 
-This trims the 'virtual space' above and below text. It's currently (20/05/2025) not widely supported.
+This trims the 'virtual space' above and below text. it is currently (20/05/2025) not widely supported.
 
 It can be used to trim text over a whole page, but this is overkill.
 
@@ -642,7 +646,7 @@ The button will be larger (taller), due to the vertical padding plus the virtual
 
 ## Conclusion
 
-- Lining up an image with text is the use-case with no fallbacks or magic numbers required: If the browser doesn't support the rule, you get what you've always got before.
+- Lining up an image with text is the use-case with no fallbacks or magic numbers required: If the browser does not support the rule, you get what you have always got before.
 
 ![Image and text with and without text-box: trim-both...](./img/text-box-trim/image-text.png)
 
@@ -930,7 +934,7 @@ textInput.addEventListener("focus", e => {
 
 #### `focusin`
 
-However, if we dynamically create a text `input` element and want the same behaviour, we can't use the `globalEventListener` function with the `focus` event: Instead, we use `focusin`.
+However, if we dynamically create a text `input` element and want the same behaviour, we cannot use the `globalEventListener` function with the `focus` event: Instead, we use `focusin`.
 
 Furthermore, we have to override the default `option = false` parameter and add the argument `true` when we _call_ the function.
 
@@ -1616,7 +1620,7 @@ const deleteAllBtn = document.querySelector("[data-delete-all-entries]")
 
 ### Delete All Keys
 
-It's easy to delete _all_ local storage, but that's not always what you want.
+it is easy to delete _all_ local storage, but that's not always what you want.
 
 For instance, you could be running multiple apps from the local file system (`file:///C:/Users/...` on Windows) each app using differently named local storage keys.
 If you deleted all local storage, all the apps would return to their default state.
@@ -3351,5 +3355,77 @@ If you returned to your main user profile 'YourName' via:
   4. Click 'Remove'.
 
 [Back to top](#code-snippets)
+
+---
+
+## ChatGPT (Free Version): Tips for Prompt Structure & Reminders to Keep it On Track
+
+When working on multi-step or ongoing projects with ChatGPT, clear and consistent communication helps ChatGPT deliver the best results while minimizing mistakes or "hallucinations." Some tips to keep tips on track:
+
+## 1. Provide Clear Context
+
+- Share relevant code, specs, or prior details upfront, especially if continuing from a previous conversation.
+- If the conversation is long, consider quoting the key part or code snippet that ChatGPT should focus on.
+
+## 2. Use Explicit References to Previous Content
+
+Since you cannot see message numbers or timestamps, refer to earlier messages by quoting unique phrases, distinctive code snippets, or describing the content clearly.
+
+**Example**:
+
+> "Please use the `name-of-file.js` code I shared with the exported functions: `function_1`, `function_2`, etc."
+
+This helps ChatGPT locate and apply the exact content you want it to use.
+
+## 3. Chunk Large Inputs or Requests
+
+Break down big blocks of code, specs, or requests into smaller, manageable chunks.
+
+Number the chunks or label them clearly (e.g., "Chunk 1," "Chunk 2") so ChatGPT can process and respond step-by-step.
+
+## 4. Be Specific About Expectations
+
+Clearly state what you want ChatGPT to do with each chunk or piece of info (e.g., summarize, refactor, explain, integrate).
+
+If you want the AI to avoid _assumptions_ or _hallucinations_, **explicitly say so**.
+
+## 5. Use Reminders or Checkpoints
+
+When continuing across multiple messages, remind ChatGPT what you have both agreed on or what to prioritize.
+
+**Example**:
+
+> "Remember to only use the code I gave you in Chunk 3 for the [topic] helpers."
+
+## 6. Confirm or Correct Early
+
+If you spot an error or hallucination, point it out quickly and provide the correct info to reset the context.
+
+This helps avoid carrying forward mistakes.
+
+## 7. How to Identify Specific Messages in This Chat
+
+Because the chat interface does not show message numbers or timestamps, the best way to reference a previous message is by:
+
+- Quoting a unique phrase or code snippet from that message.
+- Describing the content clearly, for example:
+
+> "In the message where I shared the full `name-of-file.js` with the four functions…"
+
+- Using distinctive keywords or content that uniquely identify that part of the conversation.
+
+This way, ChatGPT can search its internal context to find exactly what you mean and avoid confusion.
+
+### Why This Helps
+
+- ChatGPT can search its context for those keywords or code blocks.
+- It reduces ambiguity and helps ChatGPT find the right part of the conversation internally.
+- Since you cannot see system-generated IDs, referencing by content is the most reliable method.
+
+### Bonus Tip
+
+If you want a quick way to help ChatGPT pinpoint a section, you can copy-paste a short snippet or unique line from the message you want it to reference. That way, it is sure exactly what you mean.
+
+## [Back to top](#code-snippets)
 
 ---
