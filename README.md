@@ -101,6 +101,7 @@
 ## Windows 10
 
 - [Create New User Profile](#create-new-user-profile)
+- [Repair System Files (DISM + SFC)](#repair-system-files-dism--sfc)
 
 ---
 
@@ -3353,6 +3354,80 @@ If you returned to your main user profile 'YourName' via:
   2. `Windows + I` > Settings > 2. Accounts > Family & other users.
   3. Click on the 'TestUser' icon.
   4. Click 'Remove'.
+
+[Back to top](#code-snippets)
+
+---
+
+## Repair System Files (DISM + SFC)
+
+**Step 1 — Open Command Prompt as Administrator**
+
+1. Press **Win + S**, type `cmd`
+2. Right-click **Command Prompt** → **Run as administrator**
+
+---
+
+**Step 2 — Run the combined repair command**
+
+```cmd
+DISM.exe /Online /Cleanup-Image /RestoreHealth && sfc /scannow
+```
+
+**Explanation:**
+
+- `DISM.exe /Online /Cleanup-Image /RestoreHealth`  
+  Checks and repairs the Windows component store, downloading fresh files if needed.
+- `&&` means the next command will run only if the previous one succeeds.
+- `sfc /scannow`  
+  Scans and repairs system files using the healthy copies ensured by DISM.
+
+---
+
+**Step 3 — Reboot after completion**  
+Some fixes take effect only after restarting.
+
+---
+
+**Optional — Check logs**
+
+- **DISM log:** `C:\Windows\Logs\DISM\dism.log`
+- **SFC log (search for "[SR]"):** `C:\Windows\Logs\CBS\CBS.log`
+
+---
+
+## Troubleshooting
+
+If DISM fails with an error such as being unable to download files, try:
+
+### Option A — Use Windows Update as a repair source (default)
+
+Ensure you are connected to the internet and try again.
+
+### Option B — Use a local Windows installation media
+
+1. Download the correct Windows 10 ISO from Microsoft.
+2. Mount it (right-click → Mount).
+3. Note the drive letter (e.g., `E:`).
+4. Run:
+
+```cmd
+DISM.exe /Online /Cleanup-Image /RestoreHealth /Source:E:\sources\install.wim /LimitAccess
+```
+
+Replace `E:` with your ISO’s drive letter.
+
+**Tip:** If `install.wim` is not present but `install.esd` is, the command changes to:
+
+```cmd
+DISM.exe /Online /Cleanup-Image /RestoreHealth /Source:esd:E:\sources\install.esd:1 /LimitAccess
+```
+
+5. After DISM completes successfully, run:
+
+```cmd
+sfc /scannow
+```
 
 [Back to top](#code-snippets)
 
