@@ -3512,6 +3512,6 @@ Often, when typing into the chat input field, I can only type one letter at a ti
 
 I assume this is because so many people are accessing the bot that the server slows down.
 
-An easy solution to this is to type all messages into e.g. "Notepad" first, then paste them into the chat input field.
+An easy solution to this is to type a message into e.g. "Notepad" first, then paste it into the chat input field.
 
 [Back to top](#code-snippets)
