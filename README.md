@@ -108,6 +108,7 @@
 ## AI
 
 - [ChatGPT (Free Version): Tips for Prompt Structure & Reminders to Keep it On Track](#chatgpt-free-version-tips-for-prompt-structure--reminders-to-keep-it-on-track)
+- [ChatGPT (Free Version): Tip for when the chat input field lags]()
 
 ---
 
@@ -3501,6 +3502,16 @@ This way, ChatGPT can search its internal context to find exactly what you mean 
 
 If you want a quick way to help ChatGPT pinpoint a section, you can copy-paste a short snippet or unique line from the message you want it to reference. That way, it is sure exactly what you mean.
 
-## [Back to top](#code-snippets)
+[Back to top](#code-snippets)
 
 ---
+
+## ChatGPT (Free Version): Tip for when the chat input field lags
+
+Often, when typing into the chat input field, I can only type one letter at a time; or, letters and words appear some time after they have been typed.
+
+I assume this is because so many people are accessing the bot that the server slows down.
+
+An easy solution to this is to type all messages into e.g. "Notepad" first, then paste them into the chat input field.
+
+[Back to top](#code-snippets)
