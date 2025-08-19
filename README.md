@@ -105,10 +105,10 @@
 
 ---
 
-## AI
+## ChatGPT (Free Version
 
-- [ChatGPT (Free Version): Tips for Prompt Structure & Reminders to Keep it On Track](#chatgpt-free-version-tips-for-prompt-structure--reminders-to-keep-it-on-track)
-- [ChatGPT (Free Version): Tip for when the chat input field lags]()
+- [Tips for Prompt Structure & Reminders to Keep it On Track](#tips-for-prompt-structure--reminders-to-keep-it-on-track)
+- [Tip for when the chat input field lags](#tip-for-when-the-chat-input-field-lags)
 
 ---
 
@@ -3434,7 +3434,7 @@ sfc /scannow
 
 ---
 
-## ChatGPT (Free Version): Tips for Prompt Structure & Reminders to Keep it On Track
+## Tips for Prompt Structure & Reminders to Keep it On Track
 
 When working on multi-step or ongoing projects with ChatGPT, clear and consistent communication helps it deliver the best results while minimizing mistakes or "hallucinations." Some tips to keep tips on track:
 
@@ -3506,7 +3506,7 @@ If you want a quick way to help ChatGPT pinpoint a section, you can copy-paste a
 
 ---
 
-## ChatGPT (Free Version): Tip for when the chat input field lags
+## Tip for when the chat input field lags
 
 Often, when typing into the chat input field, I can only type one letter at a time; or, letters and words appear some time after they have been typed.
 
