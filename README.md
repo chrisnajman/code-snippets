@@ -23,6 +23,7 @@
 - [The modern way to clear floats: `display: flow-root`](#the-modern-way-to-clear-floats-display-flow-root)
 - [CSS `box-shadow` applied to only one side](#css-box-shadow-applied-to-only-one-side)
 - [Invert image (darkmode / lightmode)](#invert-image-darkmode--lightmode)
+- [Main Navigation Items Centred, Secondary Items Aligned Right](#main-navigation-items-centred-secondary-items-aligned-right)
 
 ---
 
@@ -798,6 +799,69 @@ box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.2); /* 2px extra spread */
 
 .image-invert {
   filter: invert(var(--image-invert));
+}
+```
+
+[Back to top](#code-snippets)
+
+---
+
+## Main Navigation Items Centred, Secondary Items Aligned Right
+
+Previously, I'd tried (and failed) to achieve this using a single `<ul>`. Then the obvious solution presented itself: Put the secondary links into their own `<ul>` (which is still perfectly semantic):
+
+```html
+<div class="navigation">
+  <nav>
+    <!-- Main links -->
+    <ul>
+      <li><a href="./">Home</a></li>
+      <li><a href="./blog.html">Blog</a></li>
+      <li><a href="./users.html">Users</a></li>
+    </ul>
+
+    <!-- Secondary links -->
+    <ul>
+      <li><a href="./about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
+```
+
+```css
+.navigation {
+  padding-inline: 1rem;
+
+  & nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    /*
+        At e.g. < 400px (25rem) switch from grid to flex
+        so that uls line up next to each other.
+    */
+    @media screen and (width <= 25rem) {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+  }
+
+  & ul {
+    &:first-of-type {
+      grid-column: 2; /* Will be ignored at <= 400px because of display flex on parent */
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+    }
+
+    /* Will be ignored at <= 400px because of display flex on parent */
+    &:last-of-type {
+      grid-column: 3;
+      justify-self: end;
+    }
+  }
 }
 ```
 
