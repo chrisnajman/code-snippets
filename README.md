@@ -1471,6 +1471,43 @@ console.log(getMyVar()) // 10
 /* All other @imports */
 ```
 
+> [!NOTE]
+> If the project is completely dependent on JavaScript, use the same code as above but also add a `<noscript>` message:
+
+`index.html`, etc:
+
+```html
+<body>
+  <noscript>
+    <div class="noscript-banner">
+      JavaScript is required for this site to function.
+    </div>
+  </noscript>
+  [Rest of content...]
+</body>
+```
+
+Then add `.noscript-banner` styles to `no-js.css`, e.g.
+
+```css
+.noscript-banner {
+  position: fixed;
+  top: 30%;
+  left: 0;
+  right: 0;
+  background-color: var(--warning-bg);
+  color: var(--warning);
+  font-weight: var(--bold);
+  text-align: center;
+  padding: 0.75rem 1rem;
+  z-index: 9999;
+  border-block: 0.125rem solid var(--warning);
+}
+```
+
+> [!NOTE]
+> If you want to use CSS variables in `no-js.css` place `@import "./no-js.css"` immediately after `@import "./root.css"`.
+
 [Back to top](#menu)
 
 ---
