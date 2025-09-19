@@ -1,4 +1,4 @@
-# Code Snippets TEST
+# Code Snippets
 
 ---
 
