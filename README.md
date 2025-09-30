@@ -103,10 +103,16 @@
 
 ---
 
-## Windows 10
+## Windows 10/11
 
 - [Create New User Profile](#create-new-user-profile)
 - [Repair System Files (DISM + SFC)](#repair-system-files-dism--sfc)
+
+---
+
+## Windows 11
+
+- [Delete old Windows Update files](#delete-old-windows-update-files)
 
 ---
 
@@ -3585,6 +3591,36 @@ sfc /scannow
 ```
 
 [Back to top](#menu)
+
+---
+
+## Delete old Windows Update files
+
+### Delete Manually
+
+1. Type **Disk Clean-up** in the **Search** bar.
+2. Click **Clean-up system files** button.
+3. After scan complete, click **More Options** tab.
+4. Under **System Restore and Shadow Copies** click **Clean-up** button.
+5. When pop-up appears, click **Delete**.
+6. Click "OK" button in main screen.
+7. When pop-up appears, click **Delete Files**.
+
+### Delete via PowerShell
+
+1. Run PowerShell as Adminstrator.
+2. Paste the following commands (in one block, or separately) into the PowerShell window:
+
+```bash
+Remove-Item -Path "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
+vssadmin delete shadows /for=C: /oldest /quiet
+Write-Host "Cleanup of Windows Update files and shadow copies complete!"
+
+```
+
+3. Once completed, you'll get the message, "Cleanup of Windows Update files and shadow copies complete!".
+
+[Back to top](#code-snippets)
 
 ---
 
