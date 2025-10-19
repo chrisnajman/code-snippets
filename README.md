@@ -113,6 +113,7 @@
 ## Windows 11
 
 - [Delete old Windows Update files](#delete-old-windows-update-files)
+- [Weekly Check for ID 17 and IDs 18, 19 Events (Uncorrected Hardware Errors) in System Logs](#weekly-check-for-id-17-and-ids-18-19-events-uncorrected-hardware-errors-in-system-logs)
 
 ---
 
@@ -3623,6 +3624,48 @@ Write-Host "Cleanup of Windows Update files and shadow copies complete!"
 [Back to top](#code-snippets)
 
 ---
+
+## Weekly Check for ID 17 and IDs 18, 19 Events (Uncorrected Hardware Errors) in System Logs
+
+### Count ID 17 Events
+
+`Event Viewer > Windows Logs > System > Filter Current Log`: ID 17
+
+- Note total number of events.
+- Focus on sudden changes or patterns, not the absolute number.
+- Occasional spikes after BIOS/driver updates are normal.
+
+### Check for IDs 18, 19 (Uncorrected Hardware Errors) in PowerShell
+
+- Open as admin
+- Run (then Enter):
+
+```bash
+# Check for uncorrected hardware errors in the last 30 days
+$since = (Get-Date).AddDays(-30)
+$errors = Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$since} |
+  Where-Object { ($_.Id -in 18,19) -and ($_.LevelDisplayName -in 'Error','Critical') } |
+  Select-Object TimeCreated, Id, ProviderName, LevelDisplayName, Message |
+  Sort-Object TimeCreated -Descending
+
+if ($errors) {
+    Write-Output "⚠️ Uncorrected hardware errors detected:"
+    $errors
+    Write-Output "System log will NOT be cleared. Investigate errors first."
+} else {
+    Write-Output "No uncorrected hardware errors found in the last 30 days — system is healthy ✅"
+    $confirmClear = Read-Host "Do you want to clear the System log? (Y/N)"
+    if ($confirmClear -match '^[Yy]$') {
+        Write-Output "Clearing System log..."
+        Wevtutil cl System
+        Write-Output "System log cleared ✅"
+    } else {
+        Write-Output "System log not cleared."
+    }
+}
+```
+
+## [Back to top](#code-snippets)
 
 ## Tips for Prompt Structure & Reminders to Keep ChatGPT (free version) On Track
 
