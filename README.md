@@ -3429,26 +3429,26 @@ Each snippet tested in both browser and device views.
 
 ### 1. Pull latest changes from GitHub
 
-```bash
+```git
 git pull
 ```
 
 ### 2. Clean install dependencies
 
-```bash
-rm -rf node_modules
+```powershell
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
 npm ci
 ```
 
 ### 3. Optional: fix vulnerabilities
 
-```bash
+```git
 npm audit fix
 ```
 
 ### 4. Test locally in development mode
 
-```bash
+```powershell
 npm run dev
 ```
 
@@ -3457,19 +3457,19 @@ npm run dev
 
 ### 5. Build production-ready site
 
-```bash
+```powershell
 npm run build
 ```
 
 ### 6. Check for changes
 
-```bash
+```git
 git status
 ```
 
 ### 7. Commit lockfile updates if needed
 
-```bash
+```git
 git add package-lock.json`
 git commit -m "Update package-lock.json after PR merge"
 git push
@@ -3502,7 +3502,7 @@ ipconfig /flushdns
 ## Delete `node_modules` via PowerShell
 
 ```bash
-rm -rf node_modules
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
 ```
 
 [Back to top](#menu)
