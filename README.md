@@ -3435,8 +3435,13 @@ git pull
 
 ### 2. Clean install dependencies
 
+> [!NOTE] > `npm install` installs dependencies from `package.json`, may update `package-lock.json`, and preserves existing `node_modules`, while `npm ci` strictly installs exactly what's in `package-lock.json` after deleting `node_modules`.
+
 ```powershell
+# This will run whether node_modules is installed or not.
 Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
+
+# installs node_modules / dependencies exactly as specified in package-lock.json
 npm ci
 ```
 
@@ -3470,9 +3475,15 @@ git status
 ### 7. Commit lockfile updates if needed
 
 ```git
-git add package-lock.json`
+git add .
 git commit -m "Update package-lock.json after PR merge"
 git push
+```
+
+### 8. (Optional): Delete `node_modules`
+
+```powershell
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
 ```
 
 [Back to top](#menu)
