@@ -93,6 +93,7 @@
 - [GitHub Markdown: Add image to README.md](#github-markdown-add-image-to-readmemd)
 - [GitHub Dependabot pull requests fail (because of outdated `deploy.yml`)](#github-dependabot-pull-requests-fail-because-of-outdated-deployyml))
 - [GitHub Pages: publish from `/docs` after bundling JS and minifying CSS](#github-pages-publish-from-docs-after-bundling-js-and-minifying-css)
+- [Post Dependabot PR Merge Local Workflow](#post-dependabot-pr-merge-local-workflow)
 
 ---
 
@@ -3418,6 +3419,60 @@ All snippets tested on Windows 10 with:
 - Microsoft Edge
 
 Each snippet tested in both browser and device views.
+
+[Back to top](#menu)
+
+---
+
+## Post Dependabot PR Merge Local Workflow
+
+### 1. Pull latest changes from GitHub
+
+```bash
+git pull
+```
+
+### 2. Clean install dependencies
+
+```bash
+rm -rf node_modules
+npm ci
+```
+
+### 3. Optional: fix vulnerabilities
+
+```bash
+npm audit fix
+```
+
+### 4. Test locally in development mode
+
+```bash
+npm run dev
+```
+
+- Open `http://localhost:5173` and verify site works
+- Press `Ctrl+C` when done
+
+### 5. Build production-ready site
+
+```bash
+npm run build
+```
+
+### 6. Check for changes
+
+```bash
+git status
+```
+
+### 7. Commit lockfile updates if needed
+
+```bash
+git add package-lock.json`
+git commit -m "Update package-lock.json after PR merge"
+git push
+```
 
 [Back to top](#menu)
 
