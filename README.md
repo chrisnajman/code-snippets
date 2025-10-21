@@ -101,6 +101,7 @@
 
 - [Get IPv4 Address](#get-ipv4-address)
 - [Clear DNS cache](#clear-dns-cache)
+- [Delete `node_modules` via PowerShell](#delete-node_modules-via-powershell)
 
 ---
 
@@ -3498,6 +3499,16 @@ ipconfig /flushdns
 
 ---
 
+## Delete `node_modules` via PowerShell
+
+```bash
+rm -rf node_modules
+```
+
+[Back to top](#menu)
+
+---
+
 ## Create New User Profile
 
 1. `Windows + I` > Settings > 2. Accounts > Family & other users.
@@ -3676,7 +3687,7 @@ Write-Host "Cleanup of Windows Update files and shadow copies complete!"
 
 3. Once completed, you'll get the message, "Cleanup of Windows Update files and shadow copies complete!".
 
-[Back to top](#code-snippets)
+[Back to top](#menu)
 
 ---
 
@@ -3720,7 +3731,9 @@ if ($errors) {
 }
 ```
 
-## [Back to top](#code-snippets)
+## [Back to top](#menu)
+
+---
 
 ## Tips for Prompt Structure & Reminders to Keep ChatGPT (free version) On Track
 
