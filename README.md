@@ -3435,7 +3435,8 @@ git pull
 
 ### 2. Clean install dependencies
 
-> [!NOTE] > `npm install` installs dependencies from `package.json`, may update `package-lock.json`, and preserves existing `node_modules`, while `npm ci` strictly installs exactly what's in `package-lock.json` after deleting `node_modules`.
+> [!NOTE]
+> `npm install` installs dependencies from `package.json`, may update `package-lock.json`, and preserves existing `node_modules`, while `npm ci` strictly installs exactly what's in `package-lock.json` after deleting `node_modules`.
 
 ```powershell
 # This will run whether node_modules is installed or not.
