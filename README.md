@@ -43,6 +43,8 @@
 - [Use `.some()`array method to check if at least one element matches a condition](#use-somearray-method-to-check-if-at-least-one-element-matches-a-condition)
 - [`loading="lazy"` for all images, except the first](#loadinglazy-for-all-images-except-the-first)
 - [Workaround for Read-Only Imports in ES Modules: Getter/Setter Pattern](#workaround-for-read-only-imports-in-es-modules-gettersetter-pattern)
+- [Set `input type="date"` to Current Date](#set-input-typedate-to-current-date)
+- [`textarea` Character Counter](#textarea-character-counter)
 
 ### Local Storage
 
@@ -1431,6 +1433,69 @@ import { setMyVar, getMyVar } from "./globals.js"
 
 setMyVar(10)
 console.log(getMyVar()) // 10
+```
+
+[Back to top](#menu)
+
+---
+
+## Set `input type="date"` to Current Date
+
+```html
+<input
+  type="date"
+  id="date"
+/>
+```
+
+```javascript
+const today = new Date().toISOString().split("T")[0]
+document.getElementById("date").value = today
+```
+
+[Back to top](#menu)
+
+---
+
+## `textarea` Character Counter
+
+```css
+p:empty {
+  display: none;
+}
+```
+
+```html
+<form>
+  <label for="textbox">
+    Add a brief image description (max 150 characters)
+  </label>
+  <textarea
+    name="alt-text"
+    id="textbox"
+    maxlength="150"
+  ></textarea>
+
+  <div id="char_count">0/150</div>
+  <p id="char_limit_message"></p>
+</form>
+```
+
+```javascript
+const textArea = document.getElementById("textbox")
+const characterCounter = document.getElementById("char_count")
+const maxNumOfChars = 150
+const charLimitMessage = document.getElementById("char_limit_message")
+
+function countCharacters() {
+  let numOfEnteredChars = textArea.value.length
+  let counter = maxNumOfChars - numOfEnteredChars // Output 99, 98, 97, etc.
+  characterCounter.textContent = `${maxNumOfChars - counter}/150` // Output 1/150, 2/150, 3/150, etc.
+  charLimitMessage.textContent =
+    numOfEnteredChars === 150 ? "No more characters allowed!" : ""
+}
+
+textArea.addEventListener("input", countCharacters)
 ```
 
 [Back to top](#menu)
@@ -3435,8 +3500,7 @@ git pull
 
 ### 2. Clean install dependencies
 
-> [!NOTE]
-> `npm install` installs dependencies from `package.json`, may update `package-lock.json`, and preserves existing `node_modules`, while `npm ci` strictly installs exactly what's in `package-lock.json` after deleting `node_modules`.
+> [!NOTE] > `npm install` installs dependencies from `package.json`, may update `package-lock.json`, and preserves existing `node_modules`, while `npm ci` strictly installs exactly what's in `package-lock.json` after deleting `node_modules`.
 
 ```powershell
 # This will run whether node_modules is installed or not.
