@@ -1489,7 +1489,7 @@ const charLimitMessage = document.getElementById("char_limit_message")
 
 function countCharacters() {
   let numOfEnteredChars = textArea.value.length
-  let counter = maxNumOfChars - numOfEnteredChars // Output 99, 98, 97, etc.
+  let counter = maxNumOfChars - numOfEnteredChars // Output 149, 148, 147, etc.
   characterCounter.textContent = `${maxNumOfChars - counter}/150` // Output 1/150, 2/150, 3/150, etc.
   charLimitMessage.textContent =
     numOfEnteredChars === 150 ? "No more characters allowed!" : ""
