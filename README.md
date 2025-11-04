@@ -48,6 +48,7 @@
 
 ### Local Storage
 
+- [Copy Local Storage to JSON](#copy-local-storage-to-json)
 - [Clear local storage](#clear-local-storage)
 - [Delete Local Storage Keys](#delete-local-storage-keys)
 - [Save Button Toggle Text to Local Storage](#save-button-toggle-text-to-local-storage)
@@ -1805,6 +1806,28 @@ li { list-style-type: ""}
 ```
 
 Src: [Here’s what I didn’t know about list-style-type](https://www.matuzo.at/blog/heres-what-i-didnt-know-about-list-style-type/)
+
+[Back to top](#menu)
+
+---
+
+## Copy Local Storage to JSON
+
+In Chrome:
+
+- open the code inspector and go to the 'Applications' tab.
+- Select and copy the 'Key' of the project.
+- Paste the key into the following code snippet:
+
+```javascript
+copy(localStorage.getItem("Key-goes-here"))
+```
+
+- Switch to the console and paste the snippet.
+  - The contents of local storage for that key has now been saved to the clipboard.
+- Open a text editor.
+- `File > Paste`.
+- Save the file as `[name].json`.
 
 [Back to top](#menu)
 
