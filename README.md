@@ -1823,10 +1823,10 @@ In Chrome:
 copy(localStorage.getItem("Key-goes-here"))
 ```
 
-- Switch to the console and paste the snippet.
+- Switch to the console tab and paste the snippet in the window.
   - The contents of local storage for that key has now been saved to the clipboard.
 - Open a text editor.
-- `File > Paste`.
+- `Edit > Paste`.
 - Save the file as `[name].json`.
 
 [Back to top](#menu)
