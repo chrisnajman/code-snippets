@@ -32,7 +32,8 @@
 
 ## JavaScript
 
-- [Set Multiple Attributes](#set-multiple-attributes)
+- [Update Multiple Attributes](#update-multiple-attributes)
+- [Set Multiple Attributes (Deprecated)](#set-multiple-attributes-deprecated)
 - [Global Event Listener](#global-event-listener)
 - [If, if/else statement vs Conditional (ternary) operator](#if-ifelse-statement-vs-conditional-ternary-operator)
 - [Quick Fix for 'Uncaught TypeError: ITEM is undefined'](#quick-fix-for-uncaught-typeerror-item-is-undefined)
@@ -887,7 +888,54 @@ Previously, I'd tried (and failed) to achieve this using a single `<ul>`. Then t
 
 ---
 
-## Set Multiple Attributes
+## Update Multiple Attributes
+
+- If an attribute value is non-null, it is added or updated.
+- If an attribute value is null or undefined, it is removed.
+
+```javascript
+export default function updateAttributes(element, attributes) {
+  for (const [name, value] of Object.entries(attributes)) {
+    if (value == null) {
+      element.removeAttribute(name)
+    } else {
+      element.setAttribute(name, value)
+    }
+  }
+}
+```
+
+### Usage
+
+```javascript
+const someElement = document.querySelector(".some-element")
+
+// Set attributes
+updateAttributes(someElement, {
+  id: "1",
+  "aria-label": "introduction",
+})
+
+// Remove attributes
+updateAttributes(someElement, {
+  id: null,
+  "aria-label": null,
+})
+
+// Mix setting and removing
+updateAttributes(someElement, {
+  id: "2", // set or update
+  "aria-label": null, // remove
+})
+```
+
+[Back to top](#menu)
+
+---
+
+## Set Multiple Attributes (Deprecated)
+
+See [Update Multiple Attributes](#update-multiple-attributes) for a better version.
 
 ```JavaScript
 function setMultipleAttributes(element, attributesToSet) {
