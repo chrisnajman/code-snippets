@@ -13,6 +13,7 @@
 
 ## CSS
 
+- [Target class prefixes with `class|="button"`](#target-class-prefixes-with-classbutton)
 - [Target external links with `a[href^="https"]`](#target-external-links-with-ahrefhttps)
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
@@ -143,6 +144,31 @@ Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Sec
   <h2 id="section-title">Section Title</h2>
   <p>Lorem ipsum...</p>
 </section>
+```
+
+[Back to top](#menu)
+
+---
+
+## Target class prefixes with `class|="button"`
+
+```css
+[class|="button"] {
+  /* Generic button styles */
+  background-color: blue;
+  color: white;
+  border-width: 1px solid transparent;
+}
+
+/* The generic button styles will be applied to any class with prefix 'button': */
+.button-add {
+  /* button add specific styles */
+  border-color: green;
+}
+.button-delete {
+  /* button delete specific styles */
+  border-color: red;
+}
 ```
 
 [Back to top](#menu)
