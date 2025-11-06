@@ -925,8 +925,8 @@ Previously, I'd tried (and failed) to achieve this using a single `<ul>`. Then t
 ```javascript
 export default function updateAttributes(element, attributes) {
   for (const [name, value] of Object.entries(attributes)) {
+    // Handles null and undefined
     if (value == null) {
-      // <-- handles null and undefined
       element.removeAttribute(name)
     } else {
       element.setAttribute(name, value)
