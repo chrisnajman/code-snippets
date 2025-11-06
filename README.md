@@ -919,6 +919,9 @@ Previously, I'd tried (and failed) to achieve this using a single `<ul>`. Then t
 - If an attribute value is non-null, it is added or updated.
 - If an attribute value is null or undefined, it is removed.
 
+> [!NOTE]
+> Hyphenated `name`s must be written in quotes, e.g. `"aria-label"`.
+
 ```javascript
 export default function updateAttributes(element, attributes) {
   for (const [name, value] of Object.entries(attributes)) {
