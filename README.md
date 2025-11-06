@@ -914,7 +914,7 @@ Previously, I'd tried (and failed) to achieve this using a single `<ul>`. Then t
 
 ---
 
-## Update Multiple Attribute
+## Update Multiple Attributes
 
 - If an attribute value is non-null, it is added or updated.
 - If an attribute value is null or undefined, it is removed.
