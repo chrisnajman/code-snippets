@@ -920,12 +920,13 @@ Previously, I'd tried (and failed) to achieve this using a single `<ul>`. Then t
 - If an attribute value is null or undefined, it is removed.
 
 > [!NOTE]
-> Hyphenated `name`s must be written in quotes, e.g. `"aria-label"`.
+> A hyphenated `name` must be written in quotes, e.g. `"aria-label"`.
 
 ```javascript
 export default function updateAttributes(element, attributes) {
   for (const [name, value] of Object.entries(attributes)) {
     if (value == null) {
+      // <-- handles null and undefined
       element.removeAttribute(name)
     } else {
       element.setAttribute(name, value)
@@ -946,9 +947,16 @@ updateAttributes(someElement, {
 })
 
 // Remove attributes
+// A) With 'null' (recommended)
 updateAttributes(someElement, {
   id: null,
   "aria-label": null,
+})
+
+// B) With 'undefined'
+updateAttributes(someElement, {
+  id: undefined,
+  "aria-label": undefined,
 })
 
 // Mix setting and removing
