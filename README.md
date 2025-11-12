@@ -3,7 +3,7 @@
 ---
 
 <details>
-  <summary><strong id="menu">Menu</strong></summary>
+  <summary><strong id="menu">MENU</strong></summary>
 
 ## HTML
 
