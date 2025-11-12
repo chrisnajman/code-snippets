@@ -13,7 +13,7 @@
 
 ## CSS
 
-- [Target class prefixes with `class|="button"`](#target-class-prefixes-with-classbutton)
+- [Target `class` Prefixes and Suffixes with `|` and `$` Selectors](#target-class-prefixes-and-suffixes-with--and--selectors)
 - [Target external links with `a[href^="https"]`](#target-external-links-with-ahrefhttps)
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
 - [Perfectly-rounded buttons](#perfectly-rounded-buttons)
@@ -150,7 +150,11 @@ Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Sec
 
 ---
 
-## Target class prefixes with `class|="button"`
+## Target `class` Prefixes and Suffixes with `|` and `$` Selectors
+
+### Prefixes, e.g. `[class|="button"]`
+
+The generic button styles will be applied to any class with prefix 'button'.
 
 ```css
 [class|="button"] {
@@ -160,7 +164,6 @@ Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Sec
   border-width: 1px solid transparent;
 }
 
-/* The generic button styles will be applied to any class with prefix 'button': */
 .button-add {
   /* button add specific styles */
   border-color: green;
@@ -171,7 +174,30 @@ Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Sec
 }
 ```
 
-[Back to top](#menu)
+### Suffixes, e.g. `[class$="button"]`
+
+The generic button styles will be applied to any class with suffix 'button'.
+
+```css
+[class$="button"] {
+  /* Generic button styles */
+  background-color: red;
+  color: white;
+  border-width: 1px solid transparent;
+}
+
+.add-button {
+  /* button add specific styles */
+  border-color: purple;
+}
+.delete-button {
+  /* button delete specific styles */
+  border-color: white;
+}
+```
+
+> [!IMPORTANT]
+> If you simply had a class of "button" on an element (`<button class="button">Button</button>`) then both selectors would try to apply the generic styles (and the last one defined would win). Better not to have such a monosyllabic class, but if you do, don't use the prefix and suffix selectors).
 
 ---
 
