@@ -199,6 +199,8 @@ The generic button styles will be applied to any class with suffix 'button'.
 > [!IMPORTANT]
 > If you simply had a class of "button" on an element (`<button class="button">Button</button>`) then both selectors would try to apply the generic styles (and the last one defined would win). Better not to have such a monosyllabic class, but if you do, don't use the prefix and suffix selectors).
 
+[Back to top](#menu)
+
 ---
 
 ## Target external links with `a[href^="https"]`
