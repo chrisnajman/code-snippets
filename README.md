@@ -13,6 +13,7 @@
 
 ## CSS
 
+- [CSS Grid: `auto-fit` vs `auto-fill`](#css-grid-auto-fit-vs-auto-fill)
 - [Target `class` Prefixes and Suffixes with `|` and `$` Selectors](#target-class-prefixes-and-suffixes-with--and--selectors)
 - [Target external links with `a[href^="https"]`](#target-external-links-with-ahrefhttps)
 - [CSS Variables with JavaScript: Toggle background colour](#css-variables-with-javascript-toggle-background-colour)
@@ -144,6 +145,65 @@ Without, e.g. `aria-labelledby="section-title">` and `<h2 id="section-title">Sec
   <h2 id="section-title">Section Title</h2>
   <p>Lorem ipsum...</p>
 </section>
+```
+
+[Back to menu](#menu)
+
+---
+
+## CSS Grid: `auto-fit` vs `auto-fill`
+
+Both `auto-fit` and `auto-fill` tell CSS Grid:  
+**“Make as many columns as you can that are _at least_ this wide.”**
+
+But the way they use extra space is different:
+
+### `auto-fit`: Squish the items to fill the row.
+
+`auto-fit` **tries to stretch your items to fill all the space**, instead of creating empty columns.
+
+- If the screen gets wider, the items themselves get wider.
+- No empty "ghost" columns.
+
+**Think of it like arranging books on a shelf**:
+
+with `auto-fit`, the books spread out to fill the whole shelf.
+
+```css
+.grid-auto-fit {
+  --min-column-width: 300px;
+  display: grid;
+  gap: 1rem;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(var(--min-column-width), 100%), 1fr)
+  );
+}
+```
+
+### `auto-fill`: Keep making columns - even if they’re empty.
+
+`auto-fill` **creates as many columns as will fit**, even if you don’t have enough items to fill them.
+
+- Extra space becomes empty tracks.
+- Items don’t stretch wider than your minimum width.
+
+**Using the book-shelf idea again**:
+
+with `auto-fill`, you keep adding invisible book-slots, even if you don’t have books for them.
+
+```css
+.grid-auto-fill {
+  --min-column-width: 300px;
+  display: grid;
+  gap: 1rem;
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(var(--min-column-width), 100%), 1fr)
+  );
+}
 ```
 
 [Back to menu](#menu)
