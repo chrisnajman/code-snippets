@@ -58,6 +58,12 @@
 
 ---
 
+### IndexedDB
+
+- [Chrome, IndexedDB, VSCode `settings.json`](#chrome-indexeddb-vscode-settingsjson)
+
+---
+
 ## Accessibility
 
 - [No JS](#no-js)
@@ -2166,6 +2172,48 @@ function setInitialButtonText() {
 }
 setInitialButtonText()
 ```
+
+[Back to menu](#menu)
+
+---
+
+## Chrome, IndexedDB, VSCode `settings.json`
+
+For each project using **IndexedDB**:
+
+- Make sure the database name is unique, e.g.
+
+```javascript
+// Journal project
+const DB_NAME = "journal2025"
+
+// To-Do list project
+const DB_NAME = "toDoList"
+
+// Photo gallery project
+const DB_NAME = "photoGallery"
+```
+
+This will ensure that multiple projects hosted on **GitHub Pages** have separate data stores.
+
+### Launching the project via **LiveServer** (VSCode)
+
+A further step is required if your server is local. In the project root:
+
+- Create a folder called `.vscode`. Inside this
+- create a file called `settings.json`. Inside this, add the following code, e.g.
+
+```json
+{
+  "liveServer.settings.port": 5501
+}
+```
+
+- This will launch the project using port 5501.
+- Use a **new port number** for each new project.
+
+> [!NOTE]
+> The default port for LiveServer is 5500. The safe range for custom ports is 5501–5999.
 
 [Back to menu](#menu)
 
